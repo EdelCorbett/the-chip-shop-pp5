@@ -1,0 +1,68 @@
+[{
+        "pk": 1,
+        "model": "menu.category",
+        "fields": {
+            "name": "chips",
+            "friendly_name": "Chips"
+        }
+    },
+
+    {
+        "pk": 2,
+        "model": "menu.category",
+        "fields": {
+            "name": "burgers",
+            "friendly_name": "Burgers"
+        }
+    },
+
+    {
+        "pk": 3,
+        "model": "menu.category",
+        "fields": {
+            "name": "pizza",
+            "friendly_name": "Pizza"
+        }
+    },
+
+    {
+        "pk": 4,
+        "model": "menu.category",
+        "fields": {
+            "name": "chicken",
+            "friendly_name": "Chicken"
+        }
+    },
+
+    {
+        "pk": 5,
+        "model": "menu.category",
+        "fields": {
+            "name": "dips",
+            "friendly_name": "Dips"
+        }
+    },
+
+    {
+        "pk": 6,
+        "model": "menu.category",
+        "fields": {
+            "name": "extras",
+            "friendly_name": "Extras"
+        }
+    },
+
+    {
+        "pk": 7,
+        "model": "menu.category",
+        "fields": {
+            "name": "drinks",
+            "friendly_name": "Drinks"
+        }
+    }
+
+
+
+
+
+]

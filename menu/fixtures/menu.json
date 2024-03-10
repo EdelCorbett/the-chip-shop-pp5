@@ -1,0 +1,13 @@
+[{
+    "pk": 1,
+    "model": "menu.menu",
+    "fields": {
+        "name": "Chips",
+        "description": "portion of chips",
+        "price": 3.50,
+        "category": 1,
+        "rating": 4.7,
+        "image_url": "https://pixabay.com/photos/french-fries-food-snack-fast-food-5988432/",
+        "image": "french-fries-5988432_1280.jpg"
+    }
+}]
