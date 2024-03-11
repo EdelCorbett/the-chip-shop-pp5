@@ -1,0 +1,13 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #a6a6a6;
+    color: #2f3335;
+}
+
+.logo-container img {
+    height: 200px;
+    width: auto;
+}
