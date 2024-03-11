@@ -59,6 +59,15 @@
             "name": "drinks",
             "friendly_name": "Drinks"
         }
+    },
+
+    {
+        "pk": 8,
+        "model": "menu.category",
+        "fields": {
+            "name": "fish",
+            "friendly_name": "Fish"
+        }
     }
 
 
