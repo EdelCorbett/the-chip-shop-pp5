@@ -8,6 +8,17 @@ body {
 }
 
 .logo-container img {
-    height: 200px;
+    height: 250px;
     width: auto;
+
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #2f3335;
+    color: #a6a6a6;
+    text-align: center;
+    padding: 10px;
 }

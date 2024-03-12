@@ -30,13 +30,50 @@
     {% block extra_js %}
     {% endblock %}
     
-    <title>The Chip Shop {% block extra_title %}{% endblock %}</title>
+    <title>{% block extra_title %}{% endblock %}</title>
 </head>
 <body>
     <header class="container-fluid fixed-top">
-        <div class="logo-container">
-            <img src="{% static 'images/the-chip-stop-logo.png' %}" alt="Logo">
+        <div class="d-flex align-items-center">
+            <div class="logo-container mr-0">
+                <img src="{% static 'images/the-chip-shop-logo.png' %}" alt="Logo">
         </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light flex-grow-1">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+        </nav>
+    </div>
     </header>
 
     {% if messages %}
@@ -52,9 +89,45 @@
     {% block postloadjs %}
     {% endblock %}
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class=" py-1 ml-1 mr-1">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="text-uppercase">The Chip Shop</h5>
+                    <p>Cork, Ireland</p>
+
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <h5 class="text-uppercase ">Follow us</h5>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener"
+                                aria-label="visit our Instagram page (opens in a new tab)">
+                                <i class="fab fa-instagram fa-2x icon-white "></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener"
+                                aria-label="visit our Facebook page (opens in a new tab)">
+                                <i class="fab fa-facebook-f fa-2x icon-white"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://tiktok.com" target="_blank" rel="noopener"
+                                aria-label="visit our TikTok page (opens in a new tab)">
+                                <i class="fab fa-tiktok fa-2x icon-white"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
+ <!--font awesome script -->
+<script src="https://kit.fontawesome.com/b926389346.js" crossorigin="anonymous"></script>   
     
-    <footer class="container-fluid"></footer>
 </body>
 </html>
