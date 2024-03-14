@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block page_header %}
-    <div class="container header-container">
+    <div class="container header-container" style="padding-top: 350px;>
         <div class="row">
             <div class="col"></div>
         </div>
@@ -10,11 +10,29 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
-            {{ menu }}
-            </div>
+            {% for menuitem in menu %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                    {% if menuitem.image %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ menuitem.image.url }}" alt="{{ menuitem.name }}">
+                                </a>
+                                {% else %}
+                                <a href="">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
+                                </a>
+                                {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ menuitem.name }}</h5>
+                            <p class="card-text">{{ menuitem.description }}</p>
+                            <p class="card-text">${{ menuitem.price }}</p>
+                            <a href="#" class="btn btn-primary">Add to Basket</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

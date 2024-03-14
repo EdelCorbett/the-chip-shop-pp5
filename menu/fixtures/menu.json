@@ -66,8 +66,8 @@
             "description": "chicken burger in bun with lettuce, onion,tomato, mayo and ketchup",
             "price": 5.50,
             "category": 2,
-            "image_url": "",
-            "image": ""
+            "image_url": "https://pixabay.com/photo/chicken-burger-lunch-classic-burger-2953388/",
+            "image": "chicken-burger-2953388_1280.jpg"
         }
     },
     {
