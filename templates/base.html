@@ -39,10 +39,10 @@
                 <img src="{% static 'images/the-chip-shop-logo.png' %}" alt="Logo">
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light flex-grow-1">
-            <a class="navbar-brand" href="#">Navbar</a>
+             {% comment %} <a class="navbar-brand" href="#">Navbar</a> {% endcomment %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -68,7 +68,7 @@
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                     <li class="list-inline-item dropdown">
                         <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
+                            <div class="text-center header-icon">
                                 <div><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0">My Account</p>
                             </div>
@@ -88,8 +88,8 @@
                     </li>
                     <li class="list-inline-item">
                         <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
-                            <div class="text-center">
-                                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                            <div class="text-center header-icon">
+                                <div><i class="fa-solid fa-basket-shopping"></i></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
                                         ${{ grand_total|floatformat:2 }}
@@ -103,11 +103,12 @@
                 </ul>
             </div>
         </div>
-    
+       
   </div>
-  </nav>
-  <div class="row">  <!-- Add this row for the search bar -->
-        <div class="col-12 col-lg-3 my-auto py-1 py-lg-0 ml-auto mt-n2">
+ 
+
+  <div class="row search-bar">  
+        <div class="col-12 col-lg-3 my-auto py-1 py-lg-0 ml-auto mt-n2 header-icon">
             <form method="GET" action="">
                 <div class="input-group w-100">
                     <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
@@ -121,7 +122,11 @@
                 </div>
             </form>
         </div>
+       
     </div>
+         {% include 'includes/mobile-top-header.html' %}
+  </nav>
+        
     </header>
 
     {% if messages %}

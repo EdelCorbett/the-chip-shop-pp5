@@ -2,6 +2,10 @@ html {
     height: 100%;
 }
 
+header {
+    background-color: #a6a6a6;
+}
+
 body {
 
     background-color: #a6a6a6;
@@ -14,6 +18,24 @@ body {
 
 }
 
+.header-icon {
+    color: #2f3335;
+
+}
+
+/* from Bulma */
+.icon {
+
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+
+
+
 .footer {
     position: fixed;
     bottom: 0;
@@ -22,4 +44,44 @@ body {
     color: #a6a6a6;
     text-align: center;
     padding: 10px;
+}
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
+/* fixed top navbar only on medium and up */
+@media (min-width: 992px) {
+    .fixed-top-desktop-only {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+
+    .header-container {
+        padding-top: 164px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+        /* Hide the main header */
+    }
+
+    .search-bar {
+        display: none;
+        /* Hide the search bar */
+    }
+
+    .header-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
