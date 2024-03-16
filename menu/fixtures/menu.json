@@ -6,7 +6,6 @@
             "description": "portion of chips",
             "price": 3.50,
             "category": 1,
-            "image_url": "https://pixabay.com/photos/french-fries-food-snack-fast-food-5988432/",
             "image": "french-fries-5988432_1280.jpg"
         }
     },
@@ -17,9 +16,8 @@
             "name": "Burger",
             "description": "beef burger in bun with lettuce, onion,tomato, mayo and ketchup",
             "price": 5.50,
-            "category": 1,
-            "image_url": " ",
-            "image": "humburger.jpg"
+            "category": 2,
+            "image": "hamburger.jpg"
         }
     },
     {
@@ -30,7 +28,6 @@
             "description": "margherita pizza",
             "price": 7.50,
             "category": 3,
-            "image_url": "https://pixabay.com/photos/pizza-italian-homemade-cheese-3007395/",
             "image": "pizza-3007395_1280.jpg"
         }
     },
@@ -42,7 +39,6 @@
             "description": "can of coke",
             "price": 1.50,
             "category": 7,
-            "image_url": "https://pixabay.com/photos/can-cola-can-cola-drink-brand-592366/",
             "image": "cokecan-592366_1280.jpg"
         }
     },
@@ -54,7 +50,6 @@
             "description": "can of fanta",
             "price": 1.50,
             "category": 7,
-            "image_url": "https://pixabay.com/photos/aluminum-can-coca-cola-cylinder-87987/",
             "image": "fanta-87987_1280.jpg"
         }
     },
@@ -66,7 +61,6 @@
             "description": "chicken burger in bun with lettuce, onion,tomato, mayo and ketchup",
             "price": 5.50,
             "category": 2,
-            "image_url": "https://pixabay.com/photo/chicken-burger-lunch-classic-burger-2953388/",
             "image": "chicken-burger-2953388_1280.jpg"
         }
     },
@@ -78,7 +72,6 @@
             "description": "bottle of water",
             "price": 1.50,
             "category": 7,
-            "image_url": "",
             "image": ""
         }
     },
@@ -91,7 +84,6 @@
             "description": "battered fish fillet with chips and tartare sauce",
             "price": 6.50,
             "category": 6,
-            "image_url": "https://unsplash.com/photos/a-white-plate-topped-with-fried-fish-and-fries-DyGo_AGOQwI",
             "image": "fish.jpg"
         }
     },
@@ -104,8 +96,7 @@
             "description": "portion of battered onion rings",
             "price": 3.50,
             "category": 6,
-            "image_url": "https://pixabay.com/photos/onion-rings-food-fried-onion-fast-2358947/",
-            "image": "onion-rings-2944134_1280.jpg"
+            "image": "onion-rings-2358947_1280.jpg"
         }
     }
 ]

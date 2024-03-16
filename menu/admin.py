@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, menuitem
+from .models import Category, Menuitem
 
 
 
@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
         'friendly_name',
     )
 
-class menuitemAdmin(admin.ModelAdmin):
+class MenuitemAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'category',
@@ -22,4 +22,4 @@ class menuitemAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(menuitem, menuitemAdmin)
+admin.site.register(Menuitem, MenuitemAdmin)
