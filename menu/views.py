@@ -10,9 +10,17 @@ def all_menu(request):
     """ A view to return menu page"""
 
     menu = Menuitem.objects.all()
+    category = None
     query = None
 
     if request.GET:
+
+        if 'category' in request.GET:
+            category = request.GET['category'].split(',')
+            menu = menu.filter(category__name__in=category)
+            category = Category.objects.filter(name__in=category)
+
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -28,6 +36,7 @@ def all_menu(request):
     context = {
         'menu': menu,
         'search_term': query,
+        'categories': category,
         'MEDIA_URL': settings.MEDIA_URL,
 
         
