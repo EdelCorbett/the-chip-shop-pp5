@@ -76,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request', # required for allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'basket.contexts.basket_contents',
+                'basket.contexts.delivery_info',
                 
             ],
         },
@@ -170,6 +172,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+STANDARD_DELIVERY_PRICE = '3.50'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
