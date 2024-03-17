@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
+from .contexts import basket_contents
 
 # Create your views here.
 
 def view_basket(request):
     """ A view to return the basket page """
-
     return render(request, 'basket.html')
 
 def add_to_basket(request, item_id):

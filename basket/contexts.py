@@ -1,5 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+from menu.models import Menuitem
 
 def delivery_info(request):
     return {'STANDARD_DELIVERY_PRICE': settings.STANDARD_DELIVERY_PRICE}
@@ -9,7 +11,22 @@ def basket_contents(request):
     basket_items = []
     total = 0
     product_count = 0
-    delivery = total * Decimal(settings.STANDARD_DELIVERY_PRICE)
+
+    basket = request.session.get('basket', {})
+
+    for item_id, item_data in basket.items():
+        menu_item = get_object_or_404(Menuitem, pk=item_id)
+        total += item_data * menu_item.price
+        product_count += item_data
+        basket_items.append({
+            'menu_item': menu_item,
+            'item_id': item_id,
+            'quantity': item_data,
+            'total': total,
+        })
+    
+
+    delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
     
 
     # # Check if delivery option is selected and adjust delivery charge accordingly
