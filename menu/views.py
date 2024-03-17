@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.conf import settings
+from django.contrib import messages
+from django.db.models import Q
 from .models import Category, Menuitem
 
 # Create your views here.
@@ -8,12 +10,24 @@ def all_menu(request):
     """ A view to return menu page"""
 
     menu = Menuitem.objects.all()
-    categories = Category.objects.all() 
+    query = None
+
+    if request.GET:
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if not query:
+                messages.error(request, "You didn't enter any search criteria!")
+                return redirect(reverse('menu'))
+            
+            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            menu = menu.filter(queries)
+
+    
     
 
     context = {
         'menu': menu,
-        'categories': categories,
+        'search_term': query,
         'MEDIA_URL': settings.MEDIA_URL,
 
         
