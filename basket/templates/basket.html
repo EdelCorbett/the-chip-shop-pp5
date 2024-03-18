@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load basket_tools %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -47,16 +48,46 @@
                                         <p class="my-0">€{{  item.menu_item.price }}</p>
                                     </td>
                                     <td class="py-3 w-25">
-                                        <p class="my-0">{{ item.quantity }}</p>
+                                        <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.item_id %}">
+                                            {% csrf_token %}
+                                            <div class="form-row">
+                                                <div class="col-12">
+                                                    <p class="mt-3"><strong>Quantity:</strong></p>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <button class="decrement-qty btn btn-smbtn-black rounded-0" 
+                                                                    data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
+                                                                <span>
+                                                                    <i class="fas fa-minus fa-sm"></i>
+                                                                </span>
+                                                            </button>
+                                                            <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
+                                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                                                    data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
+                                                                <span>
+                                                                    <i class="fas fa-plus fa-sm"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <button type="submit" class="update-link text-info"><small>Update</small></button>
+                                                    <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"><small>Remove</small></a>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </td>
+                                    
+
                                     <td class="py-3">
-                                        <p class="my-0">€{{ item.product.price }}</p>
+                                        <p class="my-0">€{{ item.menu_item.price | calc_subtotal:item.quantity }}</p>
                                     </td>
                                 </tr>
                             {% endfor %}
                             <tr>
                                 <td colspan="5" class="pt-5 text-right">
-                                    <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+                                    <h6><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
                                     <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
                                     <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
                                 </td>
@@ -90,4 +121,33 @@
                 {% endif %}
         </div>
     </div>
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+{% include 'menu/includes/quantity_input_script.html' %}
+
+
+<script type="text/javascript">
+    // Update quantity on click
+    $('.update-link').click(function(e) {
+        var form = $(this).closest('.update-form');
+        form.submit();
+    })
+
+    // Remove item and reload on click
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+       
+        var url = `/basket/remove/${itemId}/`;
+        var data = {
+            'csrfmiddlewaretoken': csrfToken
+        }
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         });
+    })
+</script>
 {% endblock %}

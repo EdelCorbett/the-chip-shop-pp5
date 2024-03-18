@@ -57,7 +57,14 @@ body {
     padding: 10px;
 }
 
-/* Slightly larger container on xl screens */
+.btt-link,
+.update-link,
+.remove-item {
+    cursor: pointer;
+}
+
+
+/* larger container on xl screens */
 @media (min-width: 1200px) {
     .container {
         max-width: 80%;
