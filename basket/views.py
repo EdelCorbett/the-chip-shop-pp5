@@ -20,6 +20,7 @@ def add_to_basket(request, item_id):
 
     if item_id in list(basket.keys()):
         basket[item_id] += quantity
+        messages.success(request, f'Updated {menu.name} quantity to {basket[item_id]}')
     else:
         basket[item_id] = quantity
         messages.success(request, f'Added {menu.name} to your basket')
@@ -31,14 +32,18 @@ def add_to_basket(request, item_id):
 
 def adjust_basket(request, item_id):
     """ Adjust the quantity of the specified product to the specified amount """
-
+    
+    menu = Menuitem.objects.get(pk=item_id)
     quantity = int(request.POST.get('quantity'))
     basket = request.session.get('basket', {})
 
     if quantity > 0:
         basket[item_id] = quantity
+        messages.success(request, f'Updated {menu.name} quantity to {basket[item_id]}')
     else:
         basket.pop(item_id)
+        messages.success(request, f'Removed {menu.name} from your basket')
+        
 
     request.session['basket'] = basket
     return redirect(reverse('view_basket'))
@@ -46,17 +51,25 @@ def adjust_basket(request, item_id):
 def remove_from_basket(request, item_id):
     """ Decrease the quantity of the specified item in the shopping basket """
 
-    basket = request.session.get('basket', {})
+    try:
+        menu = Menuitem.objects.get(pk=item_id)
+        basket = request.session.get('basket', {})
 
-    if item_id in basket:
-        if basket[item_id] > 1:
-            # Decrease the quantity of the item
-            basket[item_id] -= 1
+        if item_id in basket:
+            if basket[item_id] > 1:
+                # Decrease the quantity of the item
+                basket[item_id] -= 1
+                messages.success(request, f'Removed {menu.name} from your basket')
+            else:
+                # If the quantity is 1, remove the item entirely
+                basket.pop(item_id)
+                messages.success(request, f'Removed {menu.name} from your basket')
+
+            request.session['basket'] = basket
+            return HttpResponse('status: 200')
         else:
-            # If the quantity is 1, remove the item entirely
-            basket.pop(item_id)
-
-        request.session['basket'] = basket
-        return HttpResponse('status: 200')
-    else:
-        return HttpResponse('status: 500')
+            messages.error(request, 'Error: Item not found in your basket')
+            return HttpResponse(status=500)
+    except Exception as e:
+        messages.error(request, f'Error removing item: {e}')
+        return HttpResponse(status=500)

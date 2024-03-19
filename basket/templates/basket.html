@@ -39,7 +39,9 @@
                             {% for item in basket_items %}
                                 <tr>
                                     <td class="p-3 w-25">
-                                        <img class="img-fluid rounded" src="{{ item.menu_item.image.url  }}">
+                                         <a href="{% url 'menuitem_detail' item.menu_item.id %}">
+                                            <img class="img-fluid rounded" src="{{ item.menu_item.image.url  }}">
+                                        </a>
                                     </td>
                                     <td class="py-3">
                                         <p class="my-0"><strong>{{ item.menu_item.name }}</strong></p>
@@ -52,7 +54,6 @@
                                             {% csrf_token %}
                                             <div class="form-row">
                                                 <div class="col-12">
-                                                    <p class="mt-3"><strong>Quantity:</strong></p>
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <button class="decrement-qty btn btn-smbtn-black rounded-0" 
