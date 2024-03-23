@@ -8,7 +8,12 @@ from .contexts import basket_contents
 
 def view_basket(request):
     """ A view to return the basket page """
-    return render(request, 'basket.html')
+    basket = request.session.get('basket', {})
+    total = 0
+    for item_id, quantity in basket.items():
+        menu = Menuitem.objects.get(pk=item_id)
+        total += menu.price * quantity
+    return render(request, 'basket.html', {'total': total})
 
 def add_to_basket(request, item_id):
     """ Add a quantity of the specified product to the shopping basket """
