@@ -7,6 +7,7 @@ from decimal import Decimal
 
 # Create your models here.
 class Order(models.Model):
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
@@ -22,6 +23,8 @@ class Order(models.Model):
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     delivery_option = models.CharField(max_length=10, null=False, blank=False, default='collection')
+
+   
     
 
     

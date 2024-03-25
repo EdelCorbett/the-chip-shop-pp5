@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load basket_tools %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+     <style>
+        .container {
+            padding-top: 400px; 
+        }
+    </style>
+{% endblock %}
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container py-2 ">
+        <div class="row ">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="logo-font mb-0">Collection or Delivery</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'delivery_option' %}" id="deliveryOptionForm">
+                            {% csrf_token %}
+                            {% for choice in delivery_option_form.delivery_option.field.choices %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="delivery_option" id="deliveryOption{{ forloop.counter }}" value="{{ choice.0 }}" onchange="document.getElementById('deliveryOptionForm').submit();">
+                                    <label class="form-check-label" for="deliveryOption{{ forloop.counter }}">
+                                        {{ choice.1 }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                            {% if delivery_option_form.delivery_option.errors %}
+                                <div class="alert alert-danger mt-3">
+                                    {{ delivery_option_form.delivery_option.errors }}
+                                    <p>Please select a delivery option</p>
+                                </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

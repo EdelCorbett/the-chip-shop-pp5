@@ -17,17 +17,6 @@ def basket_contents(request):
     print(basket)
 
     
-
-    # for item_id, quantity in basket.items():
-    #     menu = get_object_or_404(Menuitem, pk=item_id)
-    #     total += quantity * menu.price
-    #     product_count += quantity
-    #     basket_items.append({
-    #         'item_id': item_id,
-    #         'quantity': quantity,
-    #         'menu': menu,
-    #     })
-    
     for item_id, item_data in basket.items():
         menu_item = get_object_or_404(Menuitem, pk=item_id)
         print(f"item_data: {item_data}, menu_item.price: {menu_item.price}")
