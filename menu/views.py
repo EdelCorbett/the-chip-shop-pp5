@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Category, Menuitem
+from .forms import MenuitemForm
 
 # Create your views here.
 
@@ -78,3 +79,28 @@ def menuitem_detail(request, menuitem_id):
     }
 
     return render(request, 'menu/menuitem_detail.html', context)
+
+
+def add_menuitem(request):
+    """ Add a menu item to the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('menu'))
+
+    if request.method == 'POST':
+        form = MenuitemForm(request.POST, request.FILES)
+        if form.is_valid():
+            menuitem = form.save()
+            messages.success(request, 'Successfully added menu item!')
+            return redirect(reverse('menuitem_detail', args=[menuitem.id]))
+        else:
+            messages.error(request, 'Failed to add menu item. Please ensure the form is valid.')
+    else:
+        form = MenuitemForm()
+
+    template = 'menu/add_menuitem.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
