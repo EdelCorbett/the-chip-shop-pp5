@@ -42,7 +42,11 @@
                                         {% if item.menu_item and item.menu_item.id %}
                                                 <a href="{% url 'menuitem_detail' item.menu_item.id %}">
                                         {% endif %}
-                                            <img class="img-fluid rounded" src="{{ item.menu_item.image.url  }}">
+                                            {% if item.menu_item.image %}
+                                                <img class="w-100" src="{{ item.menu_item.image.url }}" alt="{{ item.menu_item.name }}">
+                                            {% else %}
+                                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.menu_item.name }}">
+                                            {% endif %}
                                         </a>
                                     </td>
                                     <td class="py-3">
