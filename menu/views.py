@@ -104,3 +104,27 @@ def add_menuitem(request):
     }
 
     return render(request, template, context)
+
+def edit_menuitem(request, menuitem_id):
+    """ Edit a menu item in the store """
+
+    menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
+    if request.method == 'POST':
+        form = MenuitemForm(request.POST, request.FILES, instance=menuitem)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated menu item!')
+            return redirect(reverse('menuitem_detail', args=[menuitem.id]))
+        else:
+            messages.error(request, 'Failed to update menu item. Please ensure the form is valid.')
+    else:
+        form = MenuitemForm(instance=menuitem)
+        messages.info(request, f'You are editing {menuitem.name}')
+
+    template = 'menu/edit_menuitem.html'
+    context = {
+        'form': form,
+        'menuitem': menuitem,
+    }
+
+    return render(request, template, context)

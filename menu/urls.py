@@ -8,5 +8,6 @@ urlpatterns = [
     path('menu/<int:menuitem_id>/', views.menuitem_detail, name='menuitem_detail'),
     path('menu/category/<int:category_id>/', views.menu_by_category, name='menu_by_category'),
     path('add/', views.add_menuitem, name='add_menuitem'),
+    path('edit/<int:menuitem_id>/', views.edit_menuitem, name='edit_menuitem'),
 ]
 
