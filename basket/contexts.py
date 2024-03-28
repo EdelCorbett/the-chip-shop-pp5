@@ -12,9 +12,12 @@ def basket_contents(request):
     basket_items = []
     total = 0
     product_count = 0
+    delivery = 0
+    free_delivery_delta = 0
+    grand_total = 0
 
     basket = request.session.get('basket', {})
-    print(basket)
+    
 
     
     for item_id, item_data in basket.items():
@@ -28,8 +31,8 @@ def basket_contents(request):
             'quantity': item_data,
             
         })
-    # Check if delivery option is selected and adjust delivery charge accordingly
-    delivery_option = request.session.get('delivery_option', 'collection')
+   # Check if delivery option is selected and adjust delivery charge accordingly
+    delivery_option = request.session.get('delivery_option')
     if total < settings.FREE_DELIVERY_THRESHOLD:
         if delivery_option == 'delivery':
             delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
@@ -41,16 +44,17 @@ def basket_contents(request):
     # Calculate grand total including delivery charge
     grand_total = total + delivery
 
+       
+
     context = {
         'basket_items': basket_items,
         'total': total,
         'product_count': product_count,
-        'delivery': delivery,
+        'delivery': delivery ,
+        'free_delivery_delta': free_delivery_delta,
+        'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
         'grand_total': grand_total,
     }
-    print(grand_total)
-    print(delivery)
-    print(total)
 
     return context
 

@@ -36,25 +36,48 @@ class Order(models.Model):
 
     def _generate_order_number(self):
         return uuid.uuid4().hex.upper()
-    
     def update_total(self):
+        """
+        Update grand total each time a line item is added,
+        accounting for delivery costs.
+        """
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-        if self.order_total < 10:
-            self.delivery_cost = 0
+        print(f"Order total: {self.order_total}")
+        print(f"Delivery option: {self.delivery_option}")
+            
+            # Check if delivery option is selected and order total is below the free delivery threshold
+        if self.delivery_option == 'delivery' :
+            self.delivery_cost = Decimal(settings.STANDARD_DELIVERY_PRICE)
+            print(f"Delivery cost: {self.delivery_cost}") 
         else:
-            if self.delivery_option == 'delivery':
-                self.delivery_cost = Decimal(settings.STANDARD_DELIVERY_PRICE)
-            else:
-                self.delivery_cost = 0
+            self.delivery_cost = 0
+            
+            # Calculate grand total
         self.grand_total = self.order_total + self.delivery_cost
+        print(f"Grand total: {self.grand_total}")
         self.save()
+        
+
+    def save(self, *args, **kwargs):
+            """
+            Override the original save method to set the order number
+            if it hasn't been set already.
+            """
+            if not self.order_number:
+             self.order_number = self._generate_order_number()
+             super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.order_number
 
     def save(self, *args, **kwargs):
         if not self.order_number:
             self.order_number = self._generate_order_number()
+            
         super().save(*args, **kwargs)
 
     def __str__(self):
+        print(self.order_number)
         return self.order_number
 
     

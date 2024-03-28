@@ -17,7 +17,7 @@ class BaseOrderForm(forms.ModelForm):
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on first field
         """
-        delivery_option = kwargs.pop('delivery_option')
+        delivery_option = kwargs.pop('delivery_option','default')
         super().__init__(*args, **kwargs)
         placeholders = {
             'full_name': 'Full Name',
@@ -28,6 +28,7 @@ class BaseOrderForm(forms.ModelForm):
             'street_address1': 'Street Address 1',
             'street_address2': 'Street Address 2',
             'county': 'County, State or Locality',
+            'delivery_option': 'Delivery Option',
             
         }
 
