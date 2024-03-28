@@ -51,12 +51,25 @@
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
                                 </a>
                                 {% endif %}
+                                 {% if product.rating %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ menuitem.rating }} / 5</small>
+                                            {% else %}
+                                                <small class="text-muted">No Rating</small>
+                                            {% endif %}
+                                            
                         <div class="card-body">
                             <h5 class="card-title">{{ menuitem.name }}</h5>
                             <p class="card-text">{{ menuitem.description }}</p>
                             <p class="card-text">€{{ menuitem.price }}</p>
                             <a href="#" class="btn btn-primary">Add to Basket</a>
                         </div>
+                        
+                        {% if request.user.is_superuser %}
+                            <div class="card-footer">
+                                <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-secondary">Edit</a>
+                                <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

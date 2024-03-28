@@ -90,9 +90,9 @@ def add_menuitem(request):
     if request.method == 'POST':
         form = MenuitemForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            menuitem = form.save()
             messages.success(request, 'Successfully added menu item!')
-            return redirect(reverse('add_menuitem'))
+            return redirect(reverse('add_menuitem', args=[menuitem.id]))
         else:
             messages.error(request, 'Failed to add menu item. Please ensure the form is valid.')
     else:
@@ -128,3 +128,12 @@ def edit_menuitem(request, menuitem_id):
     }
 
     return render(request, template, context)
+
+def delete_menuitem(request, menuitem_id):
+    """ Delete a menu item from the store """
+
+
+    menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
+    menuitem.delete()
+    messages.success(request, 'Menu item deleted!')
+    return redirect(reverse('menu'))
