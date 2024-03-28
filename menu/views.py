@@ -94,7 +94,7 @@ def add_menuitem(request):
         if form.is_valid():
             menuitem = form.save()
             messages.success(request, 'Successfully added menu item!')
-            return redirect(reverse('add_menuitem', args=[menuitem.id]))
+            return redirect(reverse('menuitem_detail', args=[menuitem.id]))
         else:
             messages.error(request, 'Failed to add menu item. Please ensure the form is valid.')
     else:

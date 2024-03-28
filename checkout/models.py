@@ -36,6 +36,7 @@ class Order(models.Model):
 
     def _generate_order_number(self):
         return uuid.uuid4().hex.upper()
+    
     def update_total(self):
         """
         Update grand total each time a line item is added,
