@@ -141,7 +141,14 @@ def checkout(request):
         
         current_basket = basket_contents(request)
         print("Calculating total...")
-        total = current_basket['grand_total']
+        total = current_basket['total']
+
+        DELIVERY_MINIMUM_ORDER_SPEND = 10  
+        if delivery_option == 'delivery' and total < DELIVERY_MINIMUM_ORDER_SPEND:
+            messages.error(request, f"Your order must be at least €{DELIVERY_MINIMUM_ORDER_SPEND} for delivery.")
+            return redirect(reverse('delivery_option'))
+        
+
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
