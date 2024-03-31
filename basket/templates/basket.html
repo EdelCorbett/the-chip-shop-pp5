@@ -28,7 +28,7 @@
                         <table class="table table-sm table-borderless">
                             <thead class="text-black">
                                 <tr>
-                                    <th scope="col">Product Info</th>
+                                    <th scope="col">Item Info</th>
                                     <th scope="col"></th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Qty</th>
@@ -97,7 +97,7 @@
                             <td colspan="5" class="pt-5 text-right">
                                
                                 <h6><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
-                                    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                                    {% comment %} <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
                                     
                                     {% if collection %}
                                         <p class="mb-1 text-success">
@@ -105,7 +105,7 @@
                                         </p>
                                         {% endif %}
                                 
-                                   <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4> 
+                                   <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>  {% endcomment %}
                                 </td>
                             </tr>
                             <tr>
@@ -117,10 +117,9 @@
                                         <span class="text-uppercase">Keep Shopping</span>
                                     </a>
                                     <a href="{% url 'delivery_option' %}" class="btn btn-black rounded-0 btn-lg">
-                                        <span class="text-uppercase">Secure Checkout</span>
+                                        <span class="text-uppercase">Next</span>
                                         <span class="icon">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
+                                            <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </td>
                             </tr>

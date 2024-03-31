@@ -51,7 +51,7 @@
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
                                 </a>
                                 {% endif %}
-                                 {% if product.rating %}
+                                 {% if menuitem.rating %}
                                                 <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ menuitem.rating }} / 5</small>
                                             {% else %}
                                                 <small class="text-muted">No Rating</small>
