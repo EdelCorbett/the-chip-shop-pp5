@@ -18,6 +18,7 @@ class BaseOrderForm(forms.ModelForm):
         labels and set autofocus on first field
         """
         delivery_option = kwargs.pop('delivery_option','default')
+        print(delivery_option)
         super().__init__(*args, **kwargs)
         placeholders = {
             'full_name': 'Full Name',
@@ -33,6 +34,7 @@ class BaseOrderForm(forms.ModelForm):
         }
 
         if delivery_option == 'collection':
+            print('delivery_option is collection')
             for field in ['phone_number', 'street_address1', 'street_address2', 'town_or_city', 'country']:
                 self.fields[field].required = False
 
@@ -53,6 +55,7 @@ class DeliveryOptionForm(forms.Form):
         ('delivery', 'Delivery'),
         ('collection', 'Collection'),
     ]
+    print('DeliveryOptionForm')
     delivery_option = forms.ChoiceField(choices=DELIVERY_OPTIONS, required=True)
 
 

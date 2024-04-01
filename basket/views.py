@@ -20,7 +20,7 @@ def add_to_basket(request, item_id):
 
     menu = Menuitem.objects.get(pk=item_id)
     quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
+    redirect_url = request.POST.get('redirect_url' )
     basket = request.session.get('basket', {})
 
     if item_id in list(basket.keys()):
@@ -31,7 +31,7 @@ def add_to_basket(request, item_id):
         messages.success(request, f'Added {menu.name} to your basket')
 
     request.session['basket'] = basket
-    print(request.session['basket'])
+    
     return redirect(redirect_url)
 
 

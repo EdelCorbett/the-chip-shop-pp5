@@ -10,6 +10,11 @@ from django_countries.fields import CountryField
 # Create your models here.
 class Order(models.Model):
 
+    DELIVERY_OPTIONS = [
+        ('delivery', 'Delivery'),
+        ('collection', 'Collection'),
+    ]
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     full_name = models.CharField(max_length=50, null=False, blank=False)
@@ -45,16 +50,21 @@ class Order(models.Model):
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         print(f"Order total: {self.order_total}")
         print(f"Delivery option: {self.delivery_option}")
+        
+        print ("delivery_option")
             
             # Check if delivery option is selected and order total is below the free delivery threshold
         if self.delivery_option == 'delivery' :
             self.delivery_cost = Decimal(settings.STANDARD_DELIVERY_PRICE)
-            print(f"Delivery cost: {self.delivery_cost}") 
+            print(f"Delivery cost: {self.delivery_cost}")
+            print("Delivery_option is delivery") 
         else:
             self.delivery_cost = 0
+            print ("delivery cost")
             
             # Calculate grand total
         self.grand_total = self.order_total + self.delivery_cost
+        print ("grand total")
         print(f"Grand total: {self.grand_total}")
         self.save()
         
@@ -66,16 +76,8 @@ class Order(models.Model):
             """
             if not self.order_number:
              self.order_number = self._generate_order_number()
-             super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.order_number
-
-    def save(self, *args, **kwargs):
-        if not self.order_number:
-            self.order_number = self._generate_order_number()
-            
-        super().save(*args, **kwargs)
+            print(f"Saving order: delivery_option={self.delivery_option}, delivery_cost={self.delivery_cost}, grand_total={self.grand_total}")
+            super().save(*args, **kwargs)
 
     def __str__(self):
         print(self.order_number)

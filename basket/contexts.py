@@ -22,7 +22,6 @@ def basket_contents(request):
     
     for item_id, item_data in basket.items():
         menu_item = get_object_or_404(Menuitem, pk=item_id)
-        print(f"item_data: {item_data}, menu_item.price: {menu_item.price}")
         total += item_data * menu_item.price
         product_count += item_data
         basket_items.append({
@@ -33,6 +32,7 @@ def basket_contents(request):
         })
    # Check if delivery option is selected and adjust delivery charge accordingly
     delivery_option = request.session.get('delivery_option')
+    print("delivery_option: ", delivery_option)
     if total < settings.FREE_DELIVERY_THRESHOLD:
         if delivery_option == 'delivery':
             delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
@@ -40,10 +40,10 @@ def basket_contents(request):
             delivery = 0
     else:
         delivery = 0
-
+    print("delivery: ", delivery)
     # Calculate grand total including delivery charge
     grand_total = total + delivery
-
+    print("grand_total: ", grand_total)
        
 
     context = {

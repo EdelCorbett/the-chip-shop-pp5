@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
@@ -20,11 +21,16 @@ def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        
+
         stripe.PaymentIntent.modify(pid, metadata={
             'basket': json.dumps(request.session.get('basket', {})),
             'save_info': request.POST.get('save_info'),
             'username': request.user,
+            'delivery_option': request.session.get('delivery_option'),
+            
         })
+        print (request.session.get('delivery_option'))
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
@@ -35,9 +41,11 @@ def cache_checkout_data(request):
 def delivery_option(request):
     if request.method == 'POST':
         delivery_option_form = DeliveryOptionForm(request.POST)
+       
         if delivery_option_form.is_valid():
             delivery_option = delivery_option_form.cleaned_data['delivery_option']
             request.session['delivery_option'] = delivery_option
+            print(request.session['delivery_option'])
             return redirect(reverse('checkout'))
         else:
             messages.error(request, 'There was an error with your form.')
@@ -57,9 +65,12 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     delivery_option = request.session.get('delivery_option')
+    print(delivery_option)
     if not delivery_option:
         messages.error(request, 'Please select a delivery option.')
+        print("Please select a delivery option.")
         return redirect(reverse('delivery_option'))
+    # delivery_cost = Decimal(3.50) if delivery_option == 'delivery' else 0
    
     if request.method == 'POST':
        
@@ -80,8 +91,8 @@ def checkout(request):
             
         }
 
-        form_data = request.POST.copy() 
-        form_data['delivery_option'] = delivery_option 
+        
+        
         order_form = BaseOrderForm(form_data, delivery_option=delivery_option)
         print(order_form)
 
@@ -100,7 +111,14 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_basket = json.dumps(basket)
             order.delivery_option = delivery_option
+            # order.delivery_cost = delivery_cost
+            print("delivery option", order.delivery_option)
+
+            
+
+            
             order.save()   
+            print(order.delivery_cost)
             
             for item_id, quantity in basket.items():
                 try:
@@ -141,14 +159,17 @@ def checkout(request):
         
         current_basket = basket_contents(request)
         print("Calculating total...")
-        total = current_basket['total']
+        total = current_basket['grand_total']
 
         DELIVERY_MINIMUM_ORDER_SPEND = 10  
         if delivery_option == 'delivery' and total < DELIVERY_MINIMUM_ORDER_SPEND:
             messages.error(request, f"Your order must be at least €{DELIVERY_MINIMUM_ORDER_SPEND} for delivery.")
             return redirect(reverse('delivery_option'))
         
+        # delivery_cost = Decimal(3.50) if delivery_option == 'delivery' else 0
+        
 
+        # total += delivery_cost
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
@@ -193,23 +214,116 @@ def checkout(request):
         return render(request, template, context)
 
 
+# def checkout(request):
+#     stripe_public_key = settings.STRIPE_PUBLIC_KEY
+#     stripe_secret_key = settings.STRIPE_SECRET_KEY
+
+#     delivery_option = request.session.get('delivery_option')
+#     if not delivery_option:
+#         messages.error(request, 'Please select a delivery option.')
+#         return redirect(reverse('delivery_option'))
+   
+#     if request.method == 'POST':
+#         form_data = request.POST.copy()
+#         form_data['delivery_option'] = delivery_option 
+#         print (form_data)
+#         order_form = BaseOrderForm(form_data, delivery_option=delivery_option)
+        
+#         if order_form.is_valid():  
+#             order = order_form.save(commit=False)
+#             pid = request.POST.get('client_secret').split('_secret')[0]
+#             order.stripe_pid = pid
+#             order.original_basket = json.dumps(request.session.get('basket', {}))
+#             order.delivery_option = delivery_option
+#             print(order.delivery_option)
+#             order.save()   
+#             print(order)
+            
+#             for item_id, quantity in request.session.get('basket', {}).items():
+#                 try:
+#                     menu = Menuitem.objects.get(pk=item_id)
+#                     OrderLineItem.objects.create(
+#                         order=order,
+#                         menuitem=menu,
+#                         quantity=quantity
+#                     )
+#                 except Menuitem.DoesNotExist:
+#                     messages.error(request, "One of the menu items in your basket wasn't found in our database.")
+#                     order.delete()
+#                     return redirect(reverse('view_basket'))
+                
+#             request.session['save_info'] = 'save-info' in request.POST
+#             return redirect(reverse('checkout_success', args=[order.order_number]))
+#         else:
+#             messages.error(request, 'There was an error with your form. Please double check your information.')
+#             # Render the form again with error messages
+#             return render(request, 'checkout/checkout.html', {
+#                 'order_form': order_form,
+#                 'stripe_public_key': stripe_public_key,
+#                 'delivery_option': delivery_option,
+#             })
+        
+
+#     else:
+#         basket = request.session.get('basket', {})
+#         if not basket:
+#             messages.error(request, "There's nothing in your basket at the moment")
+#             return redirect(reverse('menu'))
+        
+#         current_basket = basket_contents(request)
+#         total = current_basket['grand_total']
+
+#         DELIVERY_MINIMUM_ORDER_SPEND = 10  
+#         if delivery_option == 'delivery' and total < DELIVERY_MINIMUM_ORDER_SPEND:
+#             messages.error(request, f"Your order must be at least €{DELIVERY_MINIMUM_ORDER_SPEND} for delivery.")
+#             print("delivery_option")
+#             return redirect(reverse('delivery_option'))
+        
+#         delivery_cost = current_basket.get('delivery_cost', 0) if delivery_option == 'delivery' else 0
+#         total += delivery_cost
+#         print(total)
+#         stripe_total = round(total * 100)
+#         stripe.api_key = stripe_secret_key
+#         intent = stripe.PaymentIntent.create(
+#             amount=stripe_total,
+#             currency=settings.STRIPE_CURRENCY,
+#         )
+#         print(intent)
+
+#         order_form = BaseOrderForm(delivery_option=delivery_option)
+        
+#         if not stripe_public_key:
+#             messages.warning(request, 'Stripe public key is missing. \
+#                 Did you forget to set it in your environment?')
+            
+            
+#         template = 'checkout/checkout.html'
+#         context = {
+#             'order_form': order_form,
+#             'stripe_public_key': stripe_public_key,
+#             'client_secret': intent.client_secret,
+#             'delivery_option': delivery_option,
+            
+#         }
+#         return render(request, template, context)
 
 def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
     save_info = request.session.get('save_info')
+   
     order = get_object_or_404(Order, order_number=order_number)
-    print(order)
+    
     basket = basket_contents(request)
-    print(basket)
+  
     delivery = basket['delivery']
     print(delivery)
 
     order_total = sum(item['menu_item'].price * item['quantity'] for item in basket['basket_items'])
     print(order_total)
     grand_total = order_total + delivery
-    print(grand_total)
+    print("grand_total",grand_total)
     print(delivery)
 
     if request.user.is_authenticated:
@@ -235,6 +349,7 @@ def checkout_success(request, order_number):
 
     delivery_cost = order.delivery_cost
     print(delivery_cost)
+    print(order.delivery_option)
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
         email will be sent to {order.email}.')

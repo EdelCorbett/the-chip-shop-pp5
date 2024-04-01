@@ -61,7 +61,11 @@
                             <h5 class="card-title">{{ menuitem.name }}</h5>
                             <p class="card-text">{{ menuitem.description }}</p>
                             <p class="card-text">€{{ menuitem.price }}</p>
-                            <a href="#" class="btn btn-primary">Add to Basket</a>
+                            {% comment %} <form method="post" action="{% url 'add_to_basket' menuitem.id %}">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" min="1" max="99" value="1">
+                            <input type="submit" class="btn btn-primary" value="Add to Basket">
+                            </form> {% endcomment %}
                         </div>
                         
                         {% if request.user.is_superuser %}
