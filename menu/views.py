@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
-from .models import Category, Menuitem
+from .models import Category, Menuitem, Favorite
 from .forms import MenuitemForm
 
 # Create your views here.
@@ -148,3 +148,14 @@ def delete_menuitem(request, menuitem_id):
     menuitem.delete()
     messages.success(request, 'Menu item deleted!')
     return redirect(reverse('menu'))
+
+@login_required
+def favorites_view(request):
+    favorites = Favorite.objects.filter(user=request.user)
+    return render(request, 'home', {'favorites': favorites})
+
+@login_required
+def add_to_favorites(request, menuitem_id):
+    menuitem = get_object_or_404(Menuitem, id=menuitem_id)
+    Favorite.objects.create(user=request.user, menuitem=menuitem)
+    return redirect('favorites_view')

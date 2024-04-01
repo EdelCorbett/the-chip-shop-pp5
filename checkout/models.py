@@ -27,7 +27,7 @@ class Order(models.Model):
     street_address2 = models.CharField(max_length=80, null=False, blank=False)
     county = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateField(auto_now_add=True)
-    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
+    delivery = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     delivery_option = models.CharField(max_length=10, null=False, blank=False, default='collection')
@@ -55,15 +55,15 @@ class Order(models.Model):
             
             # Check if delivery option is selected and order total is below the free delivery threshold
         if self.delivery_option == 'delivery' :
-            self.delivery_cost = Decimal(settings.STANDARD_DELIVERY_PRICE)
-            print(f"Delivery cost: {self.delivery_cost}")
+            self.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
+            print(f"Delivery : {self.delivery}")
             print("Delivery_option is delivery") 
         else:
-            self.delivery_cost = 0
-            print ("delivery cost")
+            self.delivery = 0
+            print ("delivery")
             
-            # Calculate grand total
-        self.grand_total = self.order_total + self.delivery_cost
+            #Calculate grand total
+        self.grand_total = self.order_total + self.delivery
         print ("grand total")
         print(f"Grand total: {self.grand_total}")
         self.save()
@@ -76,7 +76,7 @@ class Order(models.Model):
             """
             if not self.order_number:
              self.order_number = self._generate_order_number()
-            print(f"Saving order: delivery_option={self.delivery_option}, delivery_cost={self.delivery_cost}, grand_total={self.grand_total}")
+            print(f"Saving order: delivery_option={self.delivery_option}, delivery={self.delivery}, grand_total={self.grand_total}")
             super().save(*args, **kwargs)
 
     def __str__(self):

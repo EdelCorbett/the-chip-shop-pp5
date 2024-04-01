@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Category(models.Model):
@@ -23,3 +25,7 @@ class Menuitem (models.Model):
 
     def __str__(self):
         return self.name
+    
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    menuitem = models.ForeignKey(Menuitem, on_delete=models.CASCADE)
