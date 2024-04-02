@@ -92,6 +92,7 @@ def checkout(request):
             'postcode': request.POST.get('postcode'),
             'country': request.POST.get('country'),
             'delivery_option': delivery_option,
+            'payment_method': request.POST.get('payment_method'),
             
             
         }
@@ -116,7 +117,7 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_basket = json.dumps(basket)
             order.delivery_option = delivery_option
-            order.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)# check here!!!!!!!!!!!!!!!!!!!
+            order.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)#
             print("delivery option", order.delivery_option)
 
             
@@ -243,7 +244,7 @@ def checkout_success(request, order_number):
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
         order.user_profile = profile
-        #order.save() # check here!!!!!!!!!!!!!!!!!!!
+        order.save() # check here!!!!!!!!!!!!!!!!!!!
         print( "profile save",order.user_profile)
 
         # Save the user's info
