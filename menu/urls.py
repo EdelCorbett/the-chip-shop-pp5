@@ -13,5 +13,6 @@ urlpatterns = [
     path('delete/<int:menuitem_id>/', views.delete_menuitem, name='delete_menuitem'),
     path('favorites/', favorites_view, name='favorites_view'),
     path('add_to_favorites/<int:menuitem_id>/', add_to_favorites, name='add_to_favorites'),
+    path('remove_from_favorites/<int:menuitem_id>/', views.remove_from_favorites, name='remove_from_favorites'),
 ]
 

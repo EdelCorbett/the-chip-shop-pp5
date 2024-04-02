@@ -27,7 +27,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['the-chip-shop-pp5-7f84f31ffc3b.herokuapp.com',
                 'localhost','127.0.0.1']
 
@@ -233,7 +232,8 @@ DEFAULT_FROM_EMAIL = 'thechipshop@example.com'
 #     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 #     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
 #     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-# Default primary key field type
+
+
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

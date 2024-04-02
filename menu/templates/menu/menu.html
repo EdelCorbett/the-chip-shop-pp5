@@ -51,31 +51,32 @@
                                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
                                 </a>
                                 {% endif %}
-                                 {% if menuitem.rating %}
-                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ menuitem.rating }} / 5</small>
-                                            {% else %}
-                                                <small class="text-muted">No Rating</small>
-                                            {% endif %}
-                                            
-                        <div class="card-body">
-                            <h5 class="card-title">{{ menuitem.name }}</h5>
-                            <p class="card-text">{{ menuitem.description }}</p>
-                            <p class="card-text">€{{ menuitem.price }}</p>
-                            {% comment %} <form method="post" action="{% url 'add_to_basket' menuitem.id %}">
-                            {% csrf_token %}
-                            <input type="number" name="quantity" min="1" max="99" value="1">
-                            <input type="submit" class="btn btn-primary" value="Add to Basket">
-                            </form> {% endcomment %}
-                        </div>
+                                {% if menuitem.rating %}
+                                    <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ menuitem.rating }} / 5</small>
+                                    {% else %}
+                                        <small class="text-muted">No Rating</small>
+                                {% endif %}
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ menuitem.name }}</h5>
+                                                <p class="card-text">{{ menuitem.description }}</p>
+                                                <p class="card-text">€{{ menuitem.price }}</p>
+                                                {% if user.is_authenticated %}
+                                                    {% if menuitem.id in user_favorites %}
+                                                        <a href="{% url 'remove_from_favorites' menuitem.id %}">Remove from Favorites</a>
+                                                    {% else %}
+                                                        <a href="{% url 'add_to_favorites' menuitem.id %}">Add to Favorites</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
                         
-                        {% if request.user.is_superuser %}
-                            <div class="card-footer">
-                                <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-secondary">Edit</a>
-                                <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger">Delete</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
+                                            {% if request.user.is_superuser %}
+                                                <div class="card-footer">
+                                                    <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-secondary">Edit</a>
+                                                    <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger">Delete</a>
+                                                </div>
+                                            {% endif %}
+                                            </div>
+                                         </div>
             {% endfor %}
         </div>
     </div>

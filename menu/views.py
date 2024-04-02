@@ -51,6 +51,9 @@ def all_menu(request):
             menu = menu.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
+    user_favorites = []
+    if request.user.is_authenticated:
+        user_favorites = Favorite.objects.filter(user=request.user, menuitem__in=menu).values_list('menuitem_id', flat=True)
 
     context = {
         'menu': menu,
@@ -59,6 +62,7 @@ def all_menu(request):
         'current_categories': category,
         'current_sorting': current_sorting,
         'MEDIA_URL': settings.MEDIA_URL,
+        'user_favorites': user_favorites,
 
         
     }
@@ -152,10 +156,20 @@ def delete_menuitem(request, menuitem_id):
 @login_required
 def favorites_view(request):
     favorites = Favorite.objects.filter(user=request.user)
-    return render(request, 'home', {'favorites': favorites})
+    favorite_ids = favorites.values_list('menuitem', flat=True)
+    return render(request,'home/index.html', {'favorites': favorites})
 
 @login_required
 def add_to_favorites(request, menuitem_id):
-    menuitem = get_object_or_404(Menuitem, id=menuitem_id)
-    Favorite.objects.create(user=request.user, menuitem=menuitem)
-    return redirect('favorites_view')
+    menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, menuitem=menuitem)
+    if not created:
+        pass
+    return redirect('menu')
+
+
+@login_required
+def remove_from_favorites(request, menuitem_id):
+    menuitem = Menuitem.objects.get(pk=menuitem_id)
+    Favorite.objects.filter(user=request.user, menuitem=menuitem).delete()
+    return redirect('menu')

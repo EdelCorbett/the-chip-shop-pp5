@@ -75,7 +75,7 @@ def checkout(request):
         messages.error(request, 'Please select a delivery option.')
         print("Please select a delivery option.")
         return redirect(reverse('delivery_option'))
-    # delivery_cost = Decimal(3.50) if delivery_option == 'delivery' else 0
+    
    
     if request.method == 'POST':
        
@@ -116,7 +116,7 @@ def checkout(request):
             order.stripe_pid = pid
             order.original_basket = json.dumps(basket)
             order.delivery_option = delivery_option
-            # order.delivery_cost = delivery_cost
+            order.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)# check here!!!!!!!!!!!!!!!!!!!
             print("delivery option", order.delivery_option)
 
             
@@ -124,6 +124,11 @@ def checkout(request):
             
             order.save()   
             print(order.delivery)
+
+            
+            # order_to_print = Order.objects.get(order_number=order.order_number)
+            # print(order_to_print.order_number)
+
             
             for item_id, quantity in basket.items():
                 try:
@@ -135,6 +140,7 @@ def checkout(request):
                         quantity=quantity
                     )
                     order_line_item.save()
+                    print("order_line_item_save", order_line_item)            
                     
                 except Menuitem.DoesNotExist:
                         messages.error(request, (
@@ -142,6 +148,7 @@ def checkout(request):
                             "Please call us for assistance!")
                         )
                         order.delete()
+
                         return redirect(reverse('view_basket'))
                 
            
@@ -170,11 +177,7 @@ def checkout(request):
         if delivery_option == 'delivery' and total < DELIVERY_MINIMUM_ORDER_SPEND:
             messages.error(request, f"Your order must be at least €{DELIVERY_MINIMUM_ORDER_SPEND} for delivery.")
             return redirect(reverse('delivery_option'))
-        
-        # delivery_cost = Decimal(3.50) if delivery_option == 'delivery' else 0
-        
 
-        # total += delivery_cost
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
@@ -225,11 +228,8 @@ def checkout_success(request, order_number):
     Handle successful checkouts
     """
     save_info = request.session.get('save_info')
-   
     order = get_object_or_404(Order, order_number=order_number)
-    
     basket = basket_contents(request)
-  
     delivery = basket['delivery']
     print(delivery)
 
@@ -243,7 +243,8 @@ def checkout_success(request, order_number):
         profile = UserProfile.objects.get(user=request.user)
         # Attach the user's profile to the order
         order.user_profile = profile
-        order.save()
+        #order.save() # check here!!!!!!!!!!!!!!!!!!!
+        print( "profile save",order.user_profile)
 
         # Save the user's info
         if save_info:
