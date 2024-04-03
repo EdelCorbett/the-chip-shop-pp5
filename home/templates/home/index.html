@@ -12,28 +12,58 @@
 {% block content %}
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
-            <div class="col-7 col-md-6">
-                <a href="{% url 'menu' %}">
-                <button class="btn">Order Now</button>
-                </a>
+            <div class="col-12">
                 <div class="container-fluid">
-        <div class="row">
-            {% for favorite in favorites %}
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ favorite.menuitem.name }}</h5>
-                            <p class="card-text">{{ favorite.menuitem.description }}</p>
-                            <p class="card-text">€{{ favorite.menuitem.price }}</p>
-                            <a href="{% url 'remove_from_favorites' favorite.menuitem.id %}">Remove from Favorites</a>
+                <h2 class="text-center">Your Favorites</h2>
+                    <div class="row">                       
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for favorite in favorites %}
+                                    {% if forloop.first or forloop.counter0|divisibleby:3 %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <div class="row">
+                                    {% endif %}
+                                                <div class="col-md-4">
+                                                    <div class="card mb-4 flex-card">
+                                                        <div class="card-body carousel-card-body">
+                                                            <h6 class="card-title">{{ favorite.menuitem.name }}</h6>
+                                                            {% if favorite.menuitem.image %}
+                                                                <img src="{{ favorite.menuitem.image.url }}" class="card-img-carousel" alt="{{ favorite.menuitem.name }}">
+                                                            {% else %}
+                                                                <img src="{{ MEDIA_URL }}noimage.png" class="card-img-carousel" alt="{{ favorite.menuitem.name }}">
+                                                            {% endif %}
+                                                            <p class="card-text">€{{ favorite.menuitem.price }}</p>
+                                                            <form class="form" action="{% url 'add_to_basket' favorite.menuitem.id %}" method="POST">
+                                                                {% csrf_token %}
+                                                                <div class="form-inline">
+                                                                    <input type="number" class="form-control form-control-sm" id="quantity" name="quantity" min="1" max="99" value="1">
+                                                                    <button type="submit" class="btn btn-sm btn-primary ml-2">Add to Basket</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    {% if forloop.last or forloop.counter0|add:1|divisibleby:3 %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
+                <a href="{% url 'menu' %}">
+                    <button class="btn">Order Now</button>
+                </a>
             </div>
-        </div>
         </div>
     </div>
 {% endblock %}
