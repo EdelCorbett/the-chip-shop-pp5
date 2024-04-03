@@ -48,19 +48,18 @@ class Order(models.Model):
         accounting for delivery costs.
         """
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-        print(f"Order total: {self.order_total}")
-        print(f"Delivery option: {self.delivery_option}")
+        print("lineitems")
         
         print ("delivery_option")
             
-            # Check if delivery option is selected and order total is below the free delivery threshold
+            #Check if delivery option is selected and order total is below the free delivery threshold
         if self.delivery_option == 'delivery' :
             self.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
             print(f"Delivery : {self.delivery}")
             print("Delivery_option is delivery") 
-        else:
-            self.delivery = 0
-            print ("delivery")
+        # else:
+        #     self.delivery = 0
+        #     print ("delivery")
             
             #Calculate grand total
         self.grand_total = self.order_total + self.delivery

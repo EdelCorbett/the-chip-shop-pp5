@@ -15,27 +15,60 @@ import stripe
 import json   
 
 # Create your views here.
-
 @require_POST
 def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        
 
-        stripe.PaymentIntent.modify(pid, metadata={
+        # Get delivery option from session
+        delivery_option = request.session.get('delivery_option')
+
+        # Calculate delivery charge based on delivery option
+        if delivery_option == 'delivery':
+            delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
+        else:
+            delivery = 0
+
+        # Retrieve the existing PaymentIntent
+        payment_intent = stripe.PaymentIntent.retrieve(pid)
+
+        # Add delivery charge to the total amount
+        new_amount = int(payment_intent.amount + delivery * 100)
+
+        # Update the PaymentIntent with the new amount and metadata
+        stripe.PaymentIntent.modify(pid, amount=new_amount, metadata={
             'basket': json.dumps(request.session.get('basket', {})),
-            'save_info': request.POST.get('save_info'),
             'username': request.user,
-            'delivery_option': request.session.get('delivery_option'),
-            
+            # 'delivery_option': delivery_option,
         })
-        print (request.session.get('delivery_option'))
+
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
+
+# @require_POST
+# def cache_checkout_data(request):
+#     try:
+#         pid = request.POST.get('client_secret').split('_secret')[0]
+#         stripe.api_key = settings.STRIPE_SECRET_KEY
+        
+
+#         stripe.PaymentIntent.modify(pid, metadata={
+#             'basket': json.dumps(request.session.get('basket', {})),
+#             'save_info': request.POST.get('save_info'),
+#             'username': request.user,
+#             'delivery_option': request.session.get('delivery_option'),
+            
+#         })
+#         print (request.session.get('delivery_option'))
+#         return HttpResponse(status=200)
+#     except Exception as e:
+#         messages.error(request, 'Sorry, your payment cannot be \
+#             processed right now. Please try again later.')
+#         return HttpResponse(content=e, status=400)
 
 
 def delivery_option(request):
@@ -119,10 +152,6 @@ def checkout(request):
             order.delivery_option = delivery_option
             order.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)#
             print("delivery option", order.delivery_option)
-
-            
-
-            
             order.save()   
             print(order.delivery)
 
@@ -260,14 +289,14 @@ def checkout_success(request, order_number):
             }
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
-                user_profile_form.save()
+                # user_profile_form.save()
 
-    delivery = order.delivery
-    print(delivery)
-    print(order.delivery_option)
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
+                # delivery = order.delivery
+                # print(delivery)
+                # print(order.delivery_option)
+                messages.success(request, f'Order successfully processed! \
+                    Your order number is {order_number}. A confirmation \
+                    email will be sent to {order.email}.')
 
     if 'basket' in request.session:
         del request.session['basket']
@@ -276,9 +305,9 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
         'order_total': order_total,
-        'delivery': delivery,
-        'grand_total': grand_total,
-        'delivery_option': order.delivery_option,
+        # 'delivery': delivery,
+        # 'grand_total': grand_total,
+        # 'delivery_option': order.delivery_option,
         
     }
 

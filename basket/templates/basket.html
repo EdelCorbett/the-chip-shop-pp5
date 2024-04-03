@@ -99,11 +99,11 @@
                                 <h6><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
                                     {% comment %} <h6>Delivery: €{{ delivery|floatformat:2 }}</h6> {% endcomment %}
                                     
-                                    {% if collection %}
+                                    {% comment %} {% if collection %}
                                         <p class="mb-1 text-success">
                                             Collection selected, no delivery charge!
                                         </p>
-                                        {% endif %}
+                                        {% endif %} {% endcomment %}
                                 
                                    <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>  
                                 </td>
