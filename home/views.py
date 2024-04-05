@@ -5,3 +5,7 @@ def index(request):
     """ A view to return the index page """
     favorites = Favorite.objects.filter(user=request.user) if request.user.is_authenticated else []
     return render(request, 'home/index.html', {'favorites': favorites})
+
+def privacy(request):
+    """ A view to return the privacy page """
+    return render(request, 'home/privacy_policy.html')
