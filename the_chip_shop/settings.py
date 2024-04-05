@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = True
 ALLOWED_HOSTS = ['the-chip-shop-pp5-7f84f31ffc3b.herokuapp.com',
                 'localhost','127.0.0.1']
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'checkout',
     'profiles',
     'inquiry',
+    'review',
 
     # Other 
     'crispy_forms',

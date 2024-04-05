@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load custom_filters %}
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -8,82 +8,76 @@
         </div>
     </div>
 {% endblock %}
-
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container-fluid">
+    <div class="container body-container">
         <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
-                <div class="image-container my-5">
-                    {% if menuitem.image %}
-                        <a href="{{ menuitem.image.url }}" target="_blank">
-                            <img class="card-img-top img-fluid" src="{{ menuitem.image.url }}" alt="{{ menuitem.name }}">
-                        </a>
-                        {% else %}
-                        <a href="">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
-                        </a>
-                    {% endif %}
+            <!-- Image on the left -->
+            <div class="col-md-6">
+                <div class="card">
+                    <img src="{% if menuitem.image %}{{ menuitem.image.url }}{% else %}{% static 'noimage.png' %}{% endif %}" class="card-img-top" alt="{{ menuitem.name }}">
+                    <h5 class="card-title">{{ menuitem.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">€{{ menuitem.price }}</h6>
+                    <p class="card-text">{{ menuitem.description }}</p>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="menuitem-details-container mb-5 mt-md-5">
-                    <p class="mb-0">{{ menuitem.name }}</p>
-                    <p class="lead mb-0 text-left font-weight-bold">€{{ menuitem.price }}</p>
-                    {% if menuitem.rating %}
-                        <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ menuitem.rating }} / 5</small>
-                    {% else %}
-                        <small class="text-muted">No Rating</small>
-                    {% endif %}
-                    <p class="mt-3">{{ menuitem.description }}</p>
-                    <form class="form" action="{% url 'add_to_basket' menuitem.id %}" method="POST">
-                        {% csrf_token %}
-                        <div class="form-row">
-                            <div class="col-12">
-                                <p class="mt-3"><strong>Quantity:</strong></p>
-                                    <div class="form-group w-50">
-                                        <div class="input-group">
-                                            <button class="decrement-qty btn btn-black rounded-0" 
-                                                data-item_id="{{ menuitem.id }}" id="decrement-qty_{{ menuitem.id }}">
-                                            <span class="icon">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
-                                            </button>
-                                            <input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ menuitem.id }}" id="id_qty_{{ menuitem.id }}">
-                                            <button class="increment-qty btn btn-black rounded-0"
-                                                    data-item_id="{{ menuitem.id }}" id="increment-qty_{{ menuitem.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-plus"></i>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                    {% if request.user.is_superuser %}
-                            <div class="card-footer">
-                                <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-secondary">Edit</a>
-                                <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger">Delete</a>
-                            </div>
-                        {% endif %}
+            <!-- Form on the right -->
+            <div class="col-md-6">
+                <form class="form-inline" action="{% url 'add_to_basket' menuitem.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mr-2">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" name="quantity" value="1" min="1" max="99" class="form-control ml-2" id="quantity">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Add to Basket">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+                {% if request.user.is_superuser %}
+                <div class="btn-group mt-3">
+                    <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-secondary">Edit</a>
+                    <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger">Delete</a>
+                </div>
+                {% endif %}
+                <a href="{% url 'menu' %}" class="btn btn-outline-dark mt-3">Keep Shopping</a>
             </div>
-                            <div class="col-12">
-                            <a href="{% url 'menu' %}" class="btn btn-outline-black rounded-0 mt-5">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">Keep Shopping</span>
-                                </a>
-                                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Basket">
-                                </div>
-                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                </div>
-                        </form>
+        </div>
+        {% if user_has_purchased %}
+        <div>
+        <a href="{% url 'add_review' menuitem.id %}" class="btn btn-outline-dark mt-3">Leave A Review</a>              
+        </div>  
+        {% endif %}
+        {% if not user_has_purchased %}
+        <div>
+        <a href="{% url 'menu' %}" class="btn btn-outline-dark mt-3">Back to Menu</a>
+        </div>   
+    {% endif %}
+    </div>
+    <div class="row mt-3">
+        <div class="col-10">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reviews</h5>
+                    <hr>
+                    {% if menuitem.reviews_set.all %}
+                    <div class="review-container scrollable">
+                        {% for review in menuitem.reviews_set.all|slice:":3" %}
+                        <div class="review mb-3">
+                        <p class="mb-0">Reviewed by: {{ review.user.username }} on {{ review.created_on|date:"F j, Y" }}</p>
+                        </div>
+                            <p class="mb-0">Rating:</p>
+                            <div class="rating-stars">
+                                {% for i in review.rating|star_range %}
+                                <i class="fas fa-star"></i>
+                            {% endfor %}
+                            </div>
+                            <p class="mb-0">{{ review.comment }}</p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>No reviews yet.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-{% block postloadjs %}
-{{ block.super }}
-{% include 'menu/includes/quantity_input_script.html' %}
 {% endblock %}

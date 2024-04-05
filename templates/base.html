@@ -199,7 +199,24 @@
 {% endblock %}
 
  <!--font awesome script -->
-<script src="https://kit.fontawesome.com/b926389346.js" crossorigin="anonymous"></script>   
+<script src="https://kit.fontawesome.com/b926389346.js" crossorigin="anonymous"></script> 
+<script>
+    $(document).ready(function() {
+        console.log('Document is ready.'); // Check if DOM is ready
+
+        $('.fa-star').on('click', function() {
+            console.log('Star clicked.'); // Check if click event is triggered
+
+            var rating = $(this).data('rating');
+            console.log('Rating:', rating); // Check if rating is retrieved correctly
+
+            $('#id_rating').val(rating); // Check if value is set to input field correctly
+
+            // Toggle filled and empty star icons
+            $(this).prevAll('.fa-star').addBack().toggleClass('fas far gold-star');
+        });
+    });
+</script>  
     
 </body>
 </html>

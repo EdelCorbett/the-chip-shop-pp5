@@ -19,6 +19,10 @@ body {
 
 }
 
+.body-container {
+    margin-top: 200px;
+}
+
 /* .header-container {
     margin-bottom: 200px;
 } */
@@ -126,6 +130,11 @@ body {
     height: 100vh;
 }
 
+.scrollable {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
 
 .footer {
     /* position: fixed; */
@@ -213,6 +222,11 @@ input[name='q']::placeholder {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+/* 
+.gold-star {
+    color: gold;
+} */
 
 
 

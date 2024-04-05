@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Category, Menuitem, Favorite
 from .forms import MenuitemForm
+from checkout.models import Order, OrderLineItem
 
 # Create your views here.
 
@@ -78,9 +79,14 @@ def menu_by_category(request, category_id):
 def menuitem_detail(request, menuitem_id):
     """ A view to return individual menu items information"""
     menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
+    if request.user.is_authenticated:
+        user_has_purchased = OrderLineItem.objects.filter(order__user_profile=request.user.userprofile, menuitem=menuitem).exists()
+    else:
+        user_has_purchased = False
     
     context = {
-        'menuitem': menuitem,   
+        'menuitem': menuitem, 
+        'user_has_purchased': user_has_purchased,  
     }
 
     return render(request, 'menu/menuitem_detail.html', context)
