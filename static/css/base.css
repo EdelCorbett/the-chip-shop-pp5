@@ -103,15 +103,25 @@ body {
     /* allows the card body to take up the remaining space */
 }
 
-.flex-card {
+.card {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.flex-card .card_body {
+    flex-grow: 1;
 }
 
 .flex-card .carousel-card-body {
     flex-grow: 1;
 }
 
+.menu-image {
+    height: 200px;
+    object-fit: cover;
+}
 
 /* from Bulma */
 .icon {
@@ -221,6 +231,13 @@ input[name='q']::placeholder {
     height: 100px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+#mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    width: 600px;
 }
 
 /* 

@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from .models import Reviews
 from menu.models import Menuitem
@@ -23,9 +24,9 @@ def add_review(request, menuitem_id):
 @login_required
 def delete_review(request, review_id):
     review = get_object_or_404(Reviews, pk=review_id)
+    menuitem_id = review.menuitem.id
     review.delete()
-    return render(request, 'delete_review.html')
-
+    return HttpResponseRedirect(reverse('menuitem_detail',  kwargs={'menuitem_id': menuitem_id}))
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(Reviews, pk=review_id)
@@ -33,6 +34,7 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
+            return redirect('menuitem_detail', menuitem_id=review.menuitem.id)
     else:
         form = ReviewForm(instance=review)
-    return render(request, 'edit_review.html', {'form': form})
+    return render(request, 'review/edit_review.html', {'form': form, 'review': review})

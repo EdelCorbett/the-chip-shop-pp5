@@ -2,11 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q , Avg
 from django.db.models.functions import Lower
 from .models import Category, Menuitem, Favorite
 from .forms import MenuitemForm
 from checkout.models import Order, OrderLineItem
+from review.models import Reviews
 
 # Create your views here.
 
@@ -51,10 +52,16 @@ def all_menu(request):
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             menu = menu.filter(queries)
 
+    # Calculate average ratings for each menu item
+    for item in menu:
+        avg_rating = Reviews.objects.filter(menuitem=item).aggregate(Avg('rating'))['rating__avg']
+        item.avg_rating = round(avg_rating, 2) if avg_rating is not None else None
+
     current_sorting = f'{sort}_{direction}'
     user_favorites = []
     if request.user.is_authenticated:
         user_favorites = Favorite.objects.filter(user=request.user, menuitem__in=menu).values_list('menuitem_id', flat=True)
+        
 
     context = {
         'menu': menu,
@@ -64,8 +71,6 @@ def all_menu(request):
         'current_sorting': current_sorting,
         'MEDIA_URL': settings.MEDIA_URL,
         'user_favorites': user_favorites,
-
-        
     }
 
     return render(request, 'menu/menu.html', context)
@@ -81,6 +86,9 @@ def menuitem_detail(request, menuitem_id):
     menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
     if request.user.is_authenticated:
         user_has_purchased = OrderLineItem.objects.filter(order__user_profile=request.user.userprofile, menuitem=menuitem).exists()
+        print(f"Logged in user: {request.user}")
+        for review in menuitem.reviews_set.all():
+            print(f"Review user: {review.user}")
     else:
         user_has_purchased = False
     
