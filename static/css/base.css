@@ -13,6 +13,21 @@ body {
     height: calc(100vh - 164px);
 }
 
+.input-forms {
+    background-color: #2f3335;
+    color: #a6a6a6;
+    width: 400px !important;
+    height: auto !important;
+    margin-top: 150px;
+    margin-bottom: 150px !important;
+
+}
+
+#id_message {
+    height: 150px;
+
+}
+
 .logo-container img {
     height: 250px;
     width: auto;
@@ -132,6 +147,41 @@ body {
     justify-content: center;
     height: 1.5rem;
     width: 1.5rem;
+}
+
+.menupage-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.menu-card {
+    height: 100%;
+}
+
+
+.menu-card-body {
+    height: 100%;
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    /* Set your desired height */
+}
+
+.card-title {
+    height: 50px;
+    /* Set your desired height */
+    overflow: hidden;
+}
+
+.card-text {
+    height: 50px;
+    /* Set your desired height */
+    overflow: hidden;
 }
 
 .form-container {
@@ -260,10 +310,7 @@ input[name='q']::placeholder {
     color: #a6a6a6;
 }
 
-/* 
-.gold-star {
-    color: gold;
-} */
+
 a {
     color: #a6a6a6;
 }
