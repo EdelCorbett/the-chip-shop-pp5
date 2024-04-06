@@ -3,12 +3,12 @@ html {
 }
 
 header {
-    /* background-color: #a6a6a6; */
+    background-color: #a6a6a6;
 }
 
 body {
 
-    /* background-color: #a6a6a6; */
+    background-color: #a6a6a6;
     color: #2f3335;
     height: calc(100vh - 164px);
 }
@@ -44,10 +44,10 @@ body {
 .carousel-control-next-icon {
     height: 50px;
     width: 50px;
-    /* outline: black; */
+    outline: black;
     background-size: 100%, 100%;
-    /* border-radius: 50%; */
-    /* border: 1px solid black; */
+    border-radius: 50%;
+    border: 1px solid black;
     background-image: none;
 }
 
@@ -68,16 +68,14 @@ body {
 }
 
 .carousel-control-prev-icon:after {
-    content: '<';
+    /* content: '<'; */
     font-size: 55px;
     color: black;
 }
 
 #carouselExampleIndicators {
     width: 800px;
-
     margin: auto;
-    /* centers the carousel */
 }
 
 .carousel-inner {
@@ -99,8 +97,9 @@ body {
 }
 
 .carousel-card-body {
+    background-color: #2f3335;
     flex-grow: 1;
-    /* allows the card body to take up the remaining space */
+    color: #a6a6a6
 }
 
 .card {
@@ -110,13 +109,15 @@ body {
     width: 100%;
 }
 
+/* 
 .flex-card .card_body {
     flex-grow: 1;
+
 }
 
 .flex-card .carousel-card-body {
     flex-grow: 1;
-}
+} */
 
 .menu-image {
     height: 200px;
@@ -155,6 +156,23 @@ body {
     text-align: center;
     padding: 10px;
 
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 50px;
+}
+
+.footer-right {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.social-icons {
+    padding: 15px;
 }
 
 .btt-link,
@@ -224,7 +242,7 @@ input[name='q']::placeholder {
 }
 
 .arrow-dark {
-    border-bottom-color: #343a40 !important;
+    border-bottom-color: c !important;
 }
 
 .basket-notification-wrapper {
@@ -234,17 +252,21 @@ input[name='q']::placeholder {
 }
 
 #mc_embed_signup {
-    background: #fff;
+    background: #2f3335;
     clear: left;
     font: 14px Helvetica, Arial, sans-serif;
     width: 600px;
+    border: #a6a6a6 solid 1px;
+    color: #a6a6a6;
 }
 
 /* 
 .gold-star {
     color: gold;
 } */
-
+a {
+    color: #a6a6a6;
+}
 
 
 /* larger container on xl screens */

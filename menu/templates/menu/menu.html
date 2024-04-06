@@ -55,6 +55,11 @@
                                             <h5 class="card-title">{{ menuitem.name }}</h5>
                                             <p class="card-text">{{ menuitem.description }}</p>
                                             <p class="card-text">€{{ menuitem.price }}</p>
+                                            <form method="post" action="{% url 'add_to_basket' menuitem.id %}">
+                                                {% csrf_token %}
+                                                <input type="number" name="quantity" min="1" max="99" value="1">
+                                                <input type="submit" class="btn" value="Add to Basket">
+                                            </form>
                                                 {% if user.is_authenticated %}
                                                     {% if menuitem.id in user_favorites %}
                                                         <a href="{% url 'remove_from_favorites' menuitem.id %}">Remove from Favorites</a>
