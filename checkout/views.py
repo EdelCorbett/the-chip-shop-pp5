@@ -49,27 +49,6 @@ def cache_checkout_data(request):
             processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
 
-# @require_POST
-# def cache_checkout_data(request):
-#     try:
-#         pid = request.POST.get('client_secret').split('_secret')[0]
-#         stripe.api_key = settings.STRIPE_SECRET_KEY
-        
-
-#         stripe.PaymentIntent.modify(pid, metadata={
-#             'basket': json.dumps(request.session.get('basket', {})),
-#             'save_info': request.POST.get('save_info'),
-#             'username': request.user,
-#             'delivery_option': request.session.get('delivery_option'),
-            
-#         })
-#         print (request.session.get('delivery_option'))
-#         return HttpResponse(status=200)
-#     except Exception as e:
-#         messages.error(request, 'Sorry, your payment cannot be \
-#             processed right now. Please try again later.')
-#         return HttpResponse(content=e, status=400)
-
 
 def delivery_option(request):
     if request.method == 'POST':
@@ -252,7 +231,6 @@ def checkout(request):
         return render(request, template, context)
 
 
-
 def checkout_success(request, order_number):
     """
     Handle successful checkouts
@@ -312,3 +290,4 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+

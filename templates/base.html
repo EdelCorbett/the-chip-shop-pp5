@@ -62,9 +62,6 @@
                     <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'inquiry_form' %}">Inquiry Form</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
                 </li>
                 </ul>
                 <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
@@ -79,6 +76,7 @@
                                     <div class="dropdown-menu border-0" aria-labelledby="user-options">
                                         {% if request.user.is_authenticated %}
                                             {% if request.user.is_superuser %}
+                                                <a href="{% url 'admin:index' %}" class="dropdown-item">Django Admin panel</a>
                                                 <a href="{% url 'add_menuitem' %}" class="dropdown-item">Menu Management</a>
                                             {% endif %}
                                             <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
@@ -108,8 +106,6 @@
                     </div>
                 
             </div>
-            
-
             <div class="row search-bar">  
                     <div class="col-12 col-lg-3 my-auto py-1 py-lg-0 ml-auto mt-n2 header-icon">
                         <form method="GET" action="">
@@ -125,7 +121,6 @@
                             </div>
                         </form>
                     </div>
-                
                 </div>
                     {% include 'includes/mobile-top-header.html' %}
             </nav>
@@ -155,78 +150,12 @@
     {% block content %}
     {% endblock %}
 
-    
- <!-- Footer -->
- <footer class="footer">
-    <div class=" py-1 ml-1 mr-1">
-        <div class="row"> 
-            <!-- Left section -->
-            <div class="col-md-4 footer-left">
-                <h5 class="text-uppercase">The Chip Shop</h5>
-                <p>Cork, Ireland</p>
-                <a href="{% url 'privacy' %}">Privacy Policy</a>
-            </div>
-            <!-- Begin Mailchimp Signup Form -->
-                <div class="row mt-3">
-                    <div class="col-md-4 footer-middle">           
-                        <div id="mc_embed_shell">
-                        <div id="mc_embed_signup">
-                            <form action="https://herokuapp.us18.list-manage.com/subscribe/post?u=9aee88352e5231b73c2a163bd&amp;id=23f4008990&amp;f_id=0095c2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-                                <div id="mc_embed_signup_scroll"><h2>Subscribe</h2>
-                                    <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                                    <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""><span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span></div>
-                                <div id="mce-responses" class="clear foot">
-                                    <div class="response" id="mce-error-response" style="display: none;"></div>
-                                    <div class="response" id="mce-success-response" style="display: none;"></div>
-                                </div>
-                            <div aria-hidden="true" style="position: absolute; left: -5000px;">
-                                /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
-                                <input type="text" name="b_9aee88352e5231b73c2a163bd_23f4008990" tabindex="-1" value="">
-                            </div>
-                                <div class="optionalParent">
-                                    <div class="clear foot">
-                                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
-                                        <p style="margin: 0px auto;"><a href="http://eepurl.com/iNzGv-" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <div class="col-md-4 d-flex footer-right">
-                <h5 class="text-uppercase">Follow us</h5>
-                <ul class="list-inline social-icons mb-0">
-                    <li class="list-inline-item">
-                        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="visit our Instagram page (opens in a new tab)">
-                            <i class="fab fa-instagram fa-2x icon-white "></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="visit our Facebook page (opens in a new tab)">
-                            <i class="fab fa-facebook-f fa-2x icon-white"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="visit our TikTok page (opens in a new tab)">
-                            <i class="fab fa-tiktok fa-2x icon-white"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-
+ {% include 'includes/footer.html' %}
 
 {% block postloadjs %}
  <script type="text/javascript">
         $('.toast').toast('show');
     </script>
-
-{% endblock %}
-
  <!--font awesome script -->
 <script src="https://kit.fontawesome.com/b926389346.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script> 
@@ -234,6 +163,8 @@
     $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-</script>  
+</script>
+{% endblock %}
+
 </body>
 </html>
