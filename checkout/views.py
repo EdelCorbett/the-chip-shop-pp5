@@ -291,3 +291,17 @@ def checkout_success(request, order_number):
 
     return render(request, template, context)
 
+
+def view_orders(request, order_number=None):
+    if order_number is not None:
+        orders = [get_object_or_404(Order, order_number=order_number)]
+        template = 'checkout/view_orders.html'
+    else:
+        orders = Order.objects.all()
+        template = 'checkout/view_orders.html'
+
+    context = {
+        'orders': orders,
+    }
+
+    return render(request, template, context)

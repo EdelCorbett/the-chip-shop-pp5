@@ -64,10 +64,3 @@ select option[value=""] {
     margin: 0;
     height: 100%;
 }
-
-footer {
-    background-color: #2f3335;
-    color: #a6a6a6;
-    text-align: center;
-    padding: 10px;
-}
