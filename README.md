@@ -68,7 +68,7 @@ In this project MoSCoW was use to prioritize the most important features
 * [Pixbay](https://pixabay.com/)  Images
 * [Unsplash](https://unsplash.com/) Images
 
-* [Font awesome](https://fontawesome.com/):Icons
+* [Font awesome](https://fontawesome.com/): Icons
 * [Coolors](https://coolors.co/) generate color palette
 
 ## Acknowledgements 
