@@ -1,6 +1,31 @@
 # the-chip-shop-pp5
 A online ordering site for a fast-food takeaway
 
+ ### LIVE LINK  [The Chip Shop](https://the-chip-shop-pp5-7f84f31ffc3b.herokuapp.com/)
+ ### Link to [Github repository](https://github.com/EdelCorbett/the-chip-shop-pp5)
+
+ # Strategy
+
+This site is developed for a family run fast food take so customer can view the menu, place an oder and select the option to collect or have their order delivered.
+
+---
+## Goals
+
+
+---
+# Agile Methodology
+Github projects was use to follow agile principles. Using this help me organise my user stories with acceptance criteria and tasks in to EPICS(milestones), once I had created the user stories I then group them in to 9 different Epics 
+
+
+### [Project Board](https://github.com/users/EdelCorbett/projects/15)
+
+The Project board was divided in to 4 columns todo,In progress, done and bugs 
+----
+![](documentation/images/projectboard.png)
+
+----
+MoSCoW Prioritization
+In this project MoSCoW was use to prioritize the most important features
 
 # Technologies And Languages
 
@@ -18,7 +43,7 @@ A online ordering site for a fast-food takeaway
 
 - [Gunicorn](https://pypi.org/project/gunicorn/)  web server used to run the website
 
-- [Cloudinary](https://pypi.org/project/cloudinary/1.27.0/)
+- [AWS](https://aws.amazon.com/)
 
 - [Django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
 
