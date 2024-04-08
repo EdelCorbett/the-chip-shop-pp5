@@ -158,13 +158,13 @@
                         <p class="mb-0">€{{ order.order_total }}</p>
                     </div>
                 </div>
-                <!-- Delivery Cost -->
+                {% if delivery_option == 'delivery' %}
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <p class="mb-0">Delivery </p>
                     </div>
                     <div class="col-12 col-md-8 text-md-right">
-                        <p class="mb-0">€{{ delivery|floatformat:2 }}</p>
+                        <p class="mb-0">€{{ order.delivery|floatformat:2 }}</p>
                     </div>
                 </div>
                 <!-- Grand Total -->
@@ -176,9 +176,11 @@
                         <p class="mb-0">€{{ order.grand_total }}</p>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
+
     <!-- Optional navigation -->
     <div class="row">
         <div class="col text-center mt-3 mb-3">

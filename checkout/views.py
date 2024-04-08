@@ -114,14 +114,6 @@ def checkout(request):
         order_form = BaseOrderForm(form_data, delivery_option=delivery_option)
         print(order_form)
 
-        
-
-        if delivery_option == 'delivery':
-            order_form.fields['street_address1'].required = True
-            order_form.fields['town_or_city'].required = True
-            order_form.fields['postcode'].required = True
-            order_form.fields['country'].required = True
-       
 
         if order_form.is_valid():  
             order = order_form.save(commit=False)
@@ -133,11 +125,6 @@ def checkout(request):
             print("delivery option", order.delivery_option)
             order.save()   
             print(order.delivery)
-
-            
-            # order_to_print = Order.objects.get(order_number=order.order_number)
-            # print(order_to_print.order_number)
-
             
             for item_id, quantity in basket.items():
                 try:
@@ -159,8 +146,6 @@ def checkout(request):
                         order.delete()
 
                         return redirect(reverse('view_basket'))
-                
-           
                 
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
@@ -267,11 +252,6 @@ def checkout_success(request, order_number):
             }
             user_profile_form = UserProfileForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
-                # user_profile_form.save()
-
-                # delivery = order.delivery
-                # print(delivery)
-                # print(order.delivery_option)
                 messages.success(request, f'Order successfully processed! \
                     Your order number is {order_number}. A confirmation \
                     email will be sent to {order.email}.')
@@ -283,10 +263,10 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
         'order_total': order_total,
-        # 'delivery': delivery,
-        # 'grand_total': grand_total,
-        # 'delivery_option': order.delivery_option,
         
+        'delivery': delivery,
+        'grand_total': grand_total,
+
     }
 
     return render(request, template, context)
