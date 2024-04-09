@@ -3,7 +3,7 @@
 {% load custom_filters %}
 
 {% block page_header %}
-    <div class="container header-container" style="padding-top: 350px;>
+    <div class="container header-container">
         <div class="row">
             <div class="col"></div>
         </div>
@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar menu-page-nav navbar-expand-lg navbar-light bg-light">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             {% for category in categories %}
@@ -61,12 +61,12 @@
                                 </form>
                                 {% if user.is_authenticated %}
                                     {% if menuitem.id in user_favorites %}
-                                        <a href="{% url 'remove_from_favorites' menuitem.id %}">Remove from Favorites</a>
+                                        <a class="remove-favs"href="{% url 'remove_from_favorites' menuitem.id %}">Remove from Favorites</a>
                                     {% else %}
-                                        <a href="{% url 'add_to_favorites' menuitem.id %}">Add to Favorites</a>
+                                        <a class="add-favs"href="{% url 'add_to_favorites' menuitem.id %}">Add to Favorites</a>
                                     {% endif %}
                                     {% if menuitem.avg_rating %}
-                                        <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ menuitem.avg_rating }} / 5</small>
+                                        <small><i class="fas fa-star mr-1"></i>{{ menuitem.avg_rating }} / 5</small>
                                         <div class="rating-stars" data-toggle="tooltip" title="{{ menuitem.avg_rating }} out of 5 stars">
                                             {% for i in menuitem.avg_rating|star_range %}
                                                 <i class="fas fa-star"></i>

@@ -11,10 +11,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="overlay main-content"></div>
-    <div class="container mb-2">
-        <div class="row">
-            <div class="col">
+    <div div class="d-flex justify-content-center align-items-center m-5px">
+            <div class="card-body basket-card">
                 <hr>
                 <h2 class="logo-font mb-4">Basket</h2>
                 <hr>
@@ -43,9 +41,9 @@
                                                 <a href="{% url 'menuitem_detail' item.menu_item.id %}">
                                         {% endif %}
                                             {% if item.menu_item.image %}
-                                                <img class="w-100" src="{{ item.menu_item.image.url }}" alt="{{ item.menu_item.name }}">
+                                                <img class="img-thumbnail w-50 h-50" src="{{ item.menu_item.image.url }}" alt="{{ item.menu_item.name }}">
                                             {% else %}
-                                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.menu_item.name }}">
+                                                <img class="img-thumbnail w-50 h-50" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.menu_item.name }}">
                                             {% endif %}
                                         </a>
                                     </td>
@@ -78,22 +76,22 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <button type="submit" class="update-link text-info"><small>Update</small></button>
-                                                    <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"><small>Remove</small></a>
-                                                </div>
+                                                
                                             </div>
+                                            <div class="d-flex justify-content-between">
+                                                    <button type="submit" class="update-link text-info"><small>Update</small></button>
+                                                    <a class="remove-item text-danger" id="remove_{{ item.item_id }}"><small>Remove</small></a>
+                                                </div>
                                         </form>
                                     </td>
-                                    
-
                                     <td class="py-3">
                                         <p class="my-0">€{{ item.menu_item.price | calc_subtotal:item.quantity }}</p>
                                     </td>
                                 </tr>
                             {% endfor %}
                             <tr>
-                            
+                        </div>
+                    </div>
                             <td colspan="5" class="pt-5 text-right">
                                 <h6><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
                                 </td>
@@ -125,7 +123,6 @@
                     </a>
                 {% endif %}
         </div>
-    </div>
 
 {% endblock %}
 {% block postloadjs %}

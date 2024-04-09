@@ -38,6 +38,12 @@ body {
     margin-top: 200px;
 }
 
+.basket-card {
+    margin-top: 200px;
+    padding: 50px;
+
+}
+
 /* .header-container {
     margin-bottom: 200px;
 } */
@@ -183,6 +189,8 @@ body {
 
 .menu-card {
     height: 100%;
+    background-color: rgba(47, 51, 53, 0.3);
+    color: #121617;
 }
 
 
@@ -257,6 +265,16 @@ body {
     cursor: pointer;
 }
 
+.update-link,
+.remove-item {
+    background-color: #a6a6a6;
+    border: black 1px solid;
+}
+
+.text-info {
+    color: green !important;
+}
+
 input[name='q']::placeholder {
     color: #aab7c4;
 }
@@ -275,6 +293,14 @@ input[name='q']::placeholder {
 .toast-capper {
     height: 2px;
 }
+
+.add-favs,
+.remove-favs {
+    cursor: pointer;
+    color: #121617;
+}
+
+
 
 /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
 .arrow-up {
@@ -345,6 +371,10 @@ a {
     color: #2f3335 !important;
 }
 
+.rating-stars {
+    color: gold;
+}
+
 .order-container {
     display: flex;
     flex-direction: column;
@@ -365,7 +395,7 @@ a {
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
-        position: fixed;
+        /* position: fixed; */
         top: 0;
         right: 0;
         left: 0;
@@ -378,31 +408,22 @@ a {
 }
 
 @media (max-width: 768px) {
-    /* .navbar { */
-    /* display: none !important; */
-    /* Hide the main header */
+    .header-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #mc_embed_signup {
+        width: 350px;
+    }
+
+    .menu-page-nav {
+        display: none;
+    }
 }
-
-/* .search-bar { */
-/* display: none !important; */
-/* Hide the search bar */
-
-
-.header-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#mc_embed_signup {
-    width: 350px;
-}
-
 
 @media (max-width: 576px) {
-
-
-
     .header-icon {
         display: flex;
         justify-content: center;
@@ -414,14 +435,12 @@ a {
     }
 }
 
+
 /* Allauth form formatting */
-
-
 .allauth-form-inner-content p {
     margin-top: 1.5rem;
-    /* mt-4 */
     color: #6c757d;
-    /* text-secondary */
+
 }
 
 .allauth-form-inner-content input {
