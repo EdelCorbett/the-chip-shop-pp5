@@ -13,11 +13,11 @@
         <div class="row">
             <!-- Image on the left -->
             <div class="col-md-6">
-                <div class="card">
+                <div class="card menu-detail-card">
                     <img src="{% if menuitem.image %}{{ menuitem.image.url }}{% else %}{% static 'noimage.png' %}{% endif %}" class="card-img-top" alt="{{ menuitem.name }}">
-                    <h5 class="card-title">{{ menuitem.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">€{{ menuitem.price }}</h6>
-                    <p class="card-text">{{ menuitem.description }}</p>
+                    <h5 class="card-title p-2">{{ menuitem.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted pl-2">€{{ menuitem.price }}</h6>
+                    <p class="card-text pl-2">{{ menuitem.description }}</p>
                 </div>
             </div>
             <!-- Form on the right -->
@@ -29,7 +29,7 @@
                         <input type="number" name="quantity" value="1" min="1" max="99" class="form-control ml-2" id="quantity">
                     </div>
                     <input type="submit" class="btn btn-primary" value="Add to Basket">
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input type="hidden" name="redirect_url" value="{% url 'menu' %}">
                 </form>
                 {% if request.user.is_superuser %}
                 <div class="btn-group mt-3">

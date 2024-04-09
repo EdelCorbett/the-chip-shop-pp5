@@ -194,11 +194,8 @@
                 </a>
             {% else %}
                 <!-- If not logged in navigate to Menu page -->
-                <a href="{% url 'menu' %}" class="btn rounded-0 my-2" style="color: #351c75">
-                    <span class="icon mr-2">
-                        <i class="fas fa-gifts"></i>
-                    </span>
-                    <span class="text-uppercase">Order Again</span>
+                <a href="{% url 'home' %}" class="btn rounded-0 my-2">
+                    <span class="text-uppercase">Home Page</span>
                 </a>
             {% endif %}
         </div>

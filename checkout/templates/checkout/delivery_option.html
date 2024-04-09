@@ -4,12 +4,8 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
-     <style>
-        .container {
-            padding-top: 400px; 
-        }
-    </style>
 {% endblock %}
+
 {% block page_header %}
     <div class="container header-container">
         <div class="row">
@@ -19,12 +15,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-2 ">
+    <div class="container delivery-option-container">
         <div class="row ">
             <div class="col-lg-6 offset-lg-3">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h2 class="logo-font mb-0">Collection or Delivery</h2>
+                    <div class="card-header">
+                        <h2 class="logo-font mb-0">Collection or Delivery<i class="fa-solid fa-motorcycle"></i></h2>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{% url 'delivery_option' %}" id="deliveryOptionForm">

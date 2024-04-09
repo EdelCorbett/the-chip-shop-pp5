@@ -10,6 +10,7 @@ This site is developed for a family run fast food take so customer can view the 
 
 ---
 ## Goals
+The Goal of this site is to provide the business with a ordering system where customers can order and pay for their order so it save the staff time.For the customer this site will provide a clear menu and a easy way of ordering and paying for their order.
 
 
 ---

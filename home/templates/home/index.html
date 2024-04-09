@@ -15,9 +15,10 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-12">
                 {% if user.is_authenticated %}
+                {% if favorites %}
                     <div class="container-fluid">
                         <h2 class="text-center">Your Favorites</h2>
-                        <div class="row">
+                        <div class="row favorites-card">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     {% for favorite in favorites %}
@@ -51,7 +52,8 @@
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
@@ -59,11 +61,17 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
+                        </div>
+                    </div>
+                        {% else %}
+                            <h2 class="text-center ">You have no favorites yet. Start adding some!</h2>
+                        {% endif %}
+                        {% endif %}
+                                
                             </div>
                         </div>
                     </div>
-                {% endif %}
-
+                
                 <div class="container-fluid index-main">
                     <div class="row mt-5">
                         <!-- Hero Image Section -->

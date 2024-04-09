@@ -20,46 +20,30 @@ body {
     height: auto !important;
     margin-top: 150px;
     margin-bottom: 150px !important;
-
 }
 
 #id_message {
     height: 150px;
-
 }
 
 .logo-container img {
     height: 250px;
     width: auto;
-
-}
-
-.body-container {
-    margin-top: 200px;
 }
 
 .basket-card {
-    margin-top: 200px;
     padding: 50px;
-
 }
-
-/* .header-container {
-    margin-bottom: 200px;
-} */
 
 .main-content {
     margin-top: 200px;
     margin-bottom: 250px;
 }
 
-
 .header-icon {
     color: #2f3335;
 
 }
-
-
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -110,7 +94,6 @@ body {
     flex-direction: column;
     width: 250px;
     height: 250px;
-    /* stack the content vertically */
 }
 
 .carousel-card-body {
@@ -154,16 +137,6 @@ body {
     margin-bottom: 100px;
 }
 
-/* 
-.flex-card .card_body {
-    flex-grow: 1;
-
-}
-
-.flex-card .carousel-card-body {
-    flex-grow: 1;
-} */
-
 .menu-image {
     height: 200px;
     object-fit: cover;
@@ -195,26 +168,35 @@ body {
 
 
 .menu-card-body {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+}
+
+.card-footer {
+    margin-top: auto;
 }
 
 .card-img-top {
     object-fit: cover;
     height: 200px;
-    /* Set your desired height */
 }
 
 .card-title {
-    height: 50px;
-    /* Set your desired height */
+    height: 30px;
     overflow: hidden;
 }
 
 .card-text {
-    height: 50px;
-    /* Set your desired height */
+    height: 30px;
     overflow: hidden;
 }
+
+.category-item {
+    border-right: 1px solid #a6a6a6;
+    padding: 0 20px;
+}
+
 
 .form-container {
     display: flex;
@@ -298,9 +280,9 @@ input[name='q']::placeholder {
 .remove-favs {
     cursor: pointer;
     color: #121617;
+    border: 1px solid #121617;
+    text-align: center;
 }
-
-
 
 /* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
 .arrow-up {
@@ -362,7 +344,6 @@ input[name='q']::placeholder {
     color: #a6a6a6;
 }
 
-
 a {
     color: #a6a6a6;
 }
@@ -373,6 +354,7 @@ a {
 
 .rating-stars {
     color: gold;
+    height: 20px;
 }
 
 .order-container {
@@ -384,6 +366,11 @@ a {
     margin-top: 200px;
 }
 
+.delivery-option-container {
+
+    margin-bottom: 100px !important;
+
+}
 
 /* larger container on xl screens */
 @media (min-width: 1200px) {
@@ -403,7 +390,7 @@ a {
     }
 
     .header-container {
-        padding-top: 164px;
+        padding-top: 50px;
     }
 }
 
@@ -419,6 +406,10 @@ a {
     }
 
     .menu-page-nav {
+        display: none;
+    }
+
+    .body-container {
         display: none;
     }
 }
