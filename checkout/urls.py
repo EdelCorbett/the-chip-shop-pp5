@@ -15,6 +15,4 @@ urlpatterns = [
     path('view_orders/', view_orders, name='view_orders'),
     path('view_orders/<int:order_number>/', view_orders, name='view_order'),
     path('wh/', webhook, name='webhook'),
-
-
 ]

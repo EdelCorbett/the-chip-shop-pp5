@@ -266,6 +266,8 @@ def checkout_success(request, order_number):
         'order_total': order_total,
         'delivery': delivery,
         'grand_total': grand_total,
+        'order_url': order_url,
+        'email': order.email,
 
     }
 
