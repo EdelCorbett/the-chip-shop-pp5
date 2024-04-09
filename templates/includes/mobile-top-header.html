@@ -11,8 +11,8 @@
                 </div>
             </div>
         </form>
-    </div>
-</li>
+</div>
+
 <div class="dropdown-menu border-0" aria-labelledby="user-options">
         {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
@@ -24,5 +24,4 @@
             <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
             <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
         {% endif %}
-    </div>
-</li>
+</div>

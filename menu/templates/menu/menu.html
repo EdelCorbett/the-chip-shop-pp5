@@ -37,9 +37,60 @@
                     </div>
                 </nav>
             </div>
-            <div class="row menupage-container">
+            <div class="row menupage-container card-deck">
                 {% for menuitem in menu %}
-                    <div class="col-md-3">
+                    <div class="col-md-6 col-lg-3 mb-3 mt-3">
+                        <div class="card menu-card h-100">
+                            {% if menuitem.image %}
+                                <a href="{% url 'menuitem_detail' menuitem.id %}">
+                                    <img class="card-img-top img-fluid menu-image" src="{{ menuitem.image.url }}" alt="{{ menuitem.name }}">
+                                </a>
+                            {% else %}
+                                <a href="{% url 'menuitem_detail' menuitem.id %}">
+                                    <img class="card-img-top img-fluid menu-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
+                                </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ menuitem.name }}</h5>
+                                <p class="card-text">{{ menuitem.description }}</p>
+                                <p class="card-text">€{{ menuitem.price }}</p>
+                                <form method="post" action="{% url 'add_to_basket' menuitem.id %}" class="d-flex justify-content-end">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" min="1" max="99" value="1" class="mr-2">
+                                    <input type="submit" class="btn btn-sm " value="Add to Basket">
+                                </form>
+                                {% if user.is_authenticated %}
+                                    <div class="mt-2">
+                                        {% if menuitem.id in user_favorites %}
+                                            <a class="remove-favs p-2" href="{% url 'remove_from_favorites' menuitem.id %}">Remove from Favorites</a>
+                                        {% else %}
+                                            <a class="add-favs p-2" href="{% url 'add_to_favorites' menuitem.id %}">Add to Favorites</a>
+                                        {% endif %}
+                                    </div>  
+                                    {% if menuitem.avg_rating %}
+                                        <div class="rating-stars mt-2 p-2" data-toggle="tooltip" title="{{ menuitem.avg_rating }} out of 5 stars">
+                                            {% for i in menuitem.avg_rating|star_range %}
+                                                <i class="fas fa-star"></i>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <small class="p-2">No Rating</small>
+                                    {% endif %}
+                                    {% if request.user.is_superuser %}
+                                        <div class="card-footer pt-3">
+                                            <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-primary btn-sm mr-2">Edit</a>
+                                            <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger btn-sm ml-2">Delete</a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% comment %} <div class="row menupage-container">
+                {% for menuitem in menu %}
+                    <div class="col-md-4">
                         <div class="card mb-4 menu-card">
                             {% if menuitem.image %}
                                 <a href="{% url 'menuitem_detail' menuitem.id %}">
@@ -76,8 +127,8 @@
                                     {% endif %}
                                     {% if request.user.is_superuser %}
                                         <div class="card-footer">
-                                            <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-primary">Edit</a>
-                                            <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger">Delete</a>
+                                            <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-primary mr-5">Edit</a>
+                                            <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger ml-5">Delete</a>
                                         </div>
                                     {% endif %}
                                 {% endif %}
@@ -85,8 +136,19 @@
                         </div>
                     </div>
                 {% endfor %}
-            </div>
+            </div> {% endcomment %}
         </div>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+    $(document).ready(function() {
+        var numItems = $('.menupage-container .col-md-4').length;
+        if (numItems == 1) {
+            $('.menupage-container .col-md-4').removeClass('col-md-4').addClass('col-md');
+        }
+    });
+    </script>
 {% endblock %}
 

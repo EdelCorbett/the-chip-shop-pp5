@@ -14,11 +14,11 @@ body {
 }
 
 .input-forms {
-    background-color: #2f3335;
-    color: #a6a6a6;
-    width: 400px !important;
+    background-color: rgba(47, 51, 53, 0.8);
+    color: #edeaea;
+    width: 500px !important;
     height: auto !important;
-    margin-top: 150px;
+    margin-top: 50px;
     margin-bottom: 150px !important;
 }
 
@@ -111,14 +111,15 @@ body {
 
 .hero-image-container {
     overflow: hidden;
-    height: 700px;
     position: relative;
 
 }
 
 .hero-image-container img {
     width: 100%;
+    height: 600px;
     object-fit: cover;
+    margin-top: 50px;
 }
 
 .about-section {
@@ -158,6 +159,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    margin-bottom: 300px;
 }
 
 .menu-card {
@@ -171,10 +173,18 @@ body {
     display: flex;
     flex-direction: column;
     height: 80%;
+    background-color: rgba(47, 51, 53, 0.3);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
 }
 
 .card-footer {
     margin-top: auto;
+    /* background-color: none; */
 }
 
 .card-img-top {
@@ -215,7 +225,7 @@ body {
     /* position: fixed; */
     bottom: 0;
     width: 100%;
-    background-color: rgba(47, 51, 53, 0.8);
+    background-color: rgba(47, 51, 53);
     color: #a6a6a6;
     text-align: center;
     padding: 10px;
@@ -344,6 +354,12 @@ input[name='q']::placeholder {
     color: #a6a6a6;
 }
 
+#mce-EMAIL-HELPERTEXT {
+    display: none !important;
+}
+
+
+
 a {
     color: #a6a6a6;
 }
@@ -412,6 +428,10 @@ a {
     .body-container {
         display: none;
     }
+
+    .input-forms {
+        width: 400px !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -423,14 +443,34 @@ a {
 
     #mc_embed_signup {
         width: 250px;
+        ;
     }
-}
 
+    .input-forms {
+        width: 250px !important;
+    }
+
+    .navbar {
+        background-color: #a6a6a6 !important;
+    }
+
+    .logo-container img {
+        height: 150px;
+    }
+
+    .icon-container {
+        display: inline;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+
+}
 
 /* Allauth form formatting */
 .allauth-form-inner-content p {
     margin-top: 1.5rem;
-    color: #6c757d;
 
 }
 
@@ -478,8 +518,7 @@ a {
 }
 
 .allauth-form-inner-content a {
-    color: #17a2b8;
-    /* text-info */
+    color: #12bfde;
 }
 
 /* menuitem form */

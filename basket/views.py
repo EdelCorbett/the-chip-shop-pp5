@@ -24,7 +24,7 @@ def add_to_basket(request, item_id):
     basket = request.session.get('basket', {})
 
     if redirect_url is None:
-        redirect_url = reverse('home')
+        redirect_url = reverse('menu')
 
     if item_id in list(basket.keys()):
         basket[item_id] += quantity

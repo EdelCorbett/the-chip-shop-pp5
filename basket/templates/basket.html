@@ -20,7 +20,7 @@
                     {% if basket_items %}
                         <div class="table-responsive rounded">
                             <table class="table table-sm table-borderless">
-                                <thead class="text-black">
+                                <thead class="text-black h4">
                                     <tr>
                                         <th scope="col">Item Info</th>
                                         <th scope="col"></th>
@@ -32,22 +32,22 @@
 
                                 {% for item in basket_items %}
                                     <tr>
-                                        <td class="p-3 w-25">
+                                        <td class="w-25">
                                             {% if item.menu_item and item.menu_item.id %}
                                                     <a href="{% url 'menuitem_detail' item.menu_item.id %}">
                                             {% endif %}
                                                 {% if item.menu_item.image %}
-                                                    <img class="img-thumbnail w-50 h-50" src="{{ item.menu_item.image.url }}" alt="{{ item.menu_item.name }}">
+                                                    <img class="img-fluid" src="{{ item.menu_item.image.url }}" alt="{{ item.menu_item.name }}">
                                                 {% else %}
-                                                    <img class="img-thumbnail w-50 h-50" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.menu_item.name }}">
+                                                    <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.menu_item.name }}">
                                                 {% endif %}
                                             </a>
                                         </td>
                                         <td class="py-3">
-                                            <p class="my-0"><strong>{{ item.menu_item.name }}</strong></p>
+                                            <p class="h5 my-0"><strong>{{ item.menu_item.name }}</strong></p>
                                         </td>
                                         <td class="py-3">
-                                            <p class="my-0">€{{  item.menu_item.price }}</p>
+                                            <p class="h5 my-0">€{{  item.menu_item.price }}</p>
                                         </td>
                                         <td class="py-3 w-25">
                                             <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.item_id %}">
@@ -81,15 +81,15 @@
                                             </form>
                                         </td>
                                         <td class="py-3">
-                                            <p class="my-0">€{{ item.menu_item.price | calc_subtotal:item.quantity }}</p>
+                                            <p class="h5 my-0">€{{ item.menu_item.price | calc_subtotal:item.quantity }}</p>
                                         </td>
                                     </tr>
                                 {% endfor %}
                                 <tr>
                             </div>
                         </div>
-                                <td colspan="5" class="pt-5 text-right">
-                                    <h6><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h6>
+                                <td colspan="5" class="pt-5 pb-5 text-right">
+                                    <h4><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h4>
                                     </td>
                                 </tr>
                                 <tr>
