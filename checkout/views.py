@@ -238,7 +238,8 @@ def checkout_success(request, order_number):
         order.user_profile = profile
         order.save() # check here!!!!!!!!!!!!!!!!!!!
         print( "profile save",order.user_profile)
-
+        order_url = request.build_absolute_uri(reverse('view_orders', args=[order_number]))
+        print("Order URL:", order_url)
         # Save the user's info
         if save_info:
             profile_data = {
@@ -263,7 +264,6 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
         'order_total': order_total,
-        
         'delivery': delivery,
         'grand_total': grand_total,
 
