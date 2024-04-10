@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Reviews
 from menu.models import Menuitem
 from .forms import ReviewForm
-# Create your views here.
+
+
 def add_review(request, menuitem_id):
     menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
     if request.method == 'POST':
@@ -14,11 +15,12 @@ def add_review(request, menuitem_id):
             review.menuitem = menuitem
             review.user = request.user
             review.save()
-            return render(request, 'menu/menuitem_detail.html', {'menuitem': menuitem})
+            return render(request, 'menu/menuitem_detail.html',
+                          {'menuitem': menuitem})
     else:
         form = ReviewForm()
-    return render(request, 'review/add_review.html', {'form': form, 'menuitem': menuitem})
-
+    return render(request, 'review/add_review.html',
+                  {'form': form, 'menuitem': menuitem})
 
 
 @login_required
@@ -26,7 +28,10 @@ def delete_review(request, review_id):
     review = get_object_or_404(Reviews, pk=review_id)
     menuitem_id = review.menuitem.id
     review.delete()
-    return HttpResponseRedirect(reverse('menuitem_detail',  kwargs={'menuitem_id': menuitem_id}))
+    return HttpResponseRedirect(reverse('menuitem_detail',
+                                        kwargs={'menuitem_id': menuitem_id}))
+
+
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(Reviews, pk=review_id)
@@ -37,4 +42,5 @@ def edit_review(request, review_id):
             return redirect('menuitem_detail', menuitem_id=review.menuitem.id)
     else:
         form = ReviewForm(instance=review)
-    return render(request, 'review/edit_review.html', {'form': form, 'review': review})
+    return render(request, 'review/edit_review.html',
+                  {'form': form, 'review': review})

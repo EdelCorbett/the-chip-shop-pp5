@@ -167,11 +167,13 @@ def delete_menuitem(request, menuitem_id):
     messages.success(request, 'Menu item deleted!')
     return redirect(reverse('menu'))
 
+
 @login_required
 def favorites_view(request):
     favorites = Favorite.objects.filter(user=request.user)
     favorite_ids = favorites.values_list('menuitem', flat=True)
     return render(request,'home/index.html', {'favorites': favorites})
+
 
 @login_required
 def add_to_favorites(request, menuitem_id):

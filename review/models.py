@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from menu.models import Menuitem
-# Create your models here.
+
+
 class Reviews(models.Model):
 
     RATING_CHOICES = (
@@ -20,3 +21,4 @@ class Reviews(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s review on {self.menuitem.name}"
+    
