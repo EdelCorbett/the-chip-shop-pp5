@@ -9,3 +9,4 @@ core.python*
 __pycache__/
 *.py[cod]
 node_modules/
+dump.sql
