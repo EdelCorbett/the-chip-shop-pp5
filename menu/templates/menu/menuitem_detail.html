@@ -17,7 +17,7 @@
                     <img src="{% if menuitem.image %}{{ menuitem.image.url }}{% else %}{% static 'noimage.png' %}{% endif %}" class="card-img-top" alt="{{ menuitem.name }}">
                     <h5 class="card-title p-2">{{ menuitem.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted pl-2">€{{ menuitem.price }}</h6>
-                    <p class="card-text pl-2">{{ menuitem.description }}</p>
+                    <p class="card-text pl-2 pb-3">{{ menuitem.description }}</p>
                 </div>
             </div>
             <!-- Form on the right -->

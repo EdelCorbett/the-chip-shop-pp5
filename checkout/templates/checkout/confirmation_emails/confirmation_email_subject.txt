@@ -1,1 +1,1 @@
-The Chip Shop Confirmation for Order Number {{ order.order_number }}
+The Chip Shop Confirmation for order placed on {{ order.date }}

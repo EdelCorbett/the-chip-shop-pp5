@@ -39,7 +39,7 @@
             </div>
             <div class="row menupage-container card-deck">
                 {% for menuitem in menu %}
-                    <div class="col-md-6 col-lg-3 mb-3 mt-3">
+                    <div class="col-md-6  mb-3 mt-3">
                         <div class="card menu-card h-100">
                             {% if menuitem.image %}
                                 <a href="{% url 'menuitem_detail' menuitem.id %}">
@@ -54,10 +54,10 @@
                                 <h5 class="card-title">{{ menuitem.name }}</h5>
                                 <p class="card-text">{{ menuitem.description }}</p>
                                 <p class="card-text">€{{ menuitem.price }}</p>
-                                <form method="post" action="{% url 'add_to_basket' menuitem.id %}" class="d-flex justify-content-end">
+                                <form method="post" action="{% url 'add_to_basket' menuitem.id %}" class="d-flex justify-content-end my-3">
                                     {% csrf_token %}
                                     <input type="number" name="quantity" min="1" max="99" value="1" class="mr-2">
-                                    <input type="submit" class="btn btn-sm " value="Add to Basket">
+                                    <input type="submit" class="btn btn-sm" value="Add to Basket">
                                 </form>
                                 {% if user.is_authenticated %}
                                     <div class="mt-2">
@@ -88,55 +88,6 @@
                     </div>
                 {% endfor %}
             </div>
-            {% comment %} <div class="row menupage-container">
-                {% for menuitem in menu %}
-                    <div class="col-md-4">
-                        <div class="card mb-4 menu-card">
-                            {% if menuitem.image %}
-                                <a href="{% url 'menuitem_detail' menuitem.id %}">
-                                    <img class="card-img-top img-fluid menu-image" src="{{ menuitem.image.url }}" alt="{{ menuitem.name }}">
-                                </a>
-                            {% else %}
-                                <a href="{% url 'menuitem_detail' menuitem.id %}">
-                                    <img class="card-img-top img-fluid menu-image" src="{{ MEDIA_URL }}noimage.png" alt="{{ menuitem.name }}">
-                                </a>
-                            {% endif %}
-                            <div class="card-body menu-card-body">
-                                <h5 class="card-title">{{ menuitem.name }}</h5>
-                                <p class="card-text">{{ menuitem.description }}</p>
-                                <p class="card-text">€{{ menuitem.price }}</p>
-                                <form method="post" action="{% url 'add_to_basket' menuitem.id %}">
-                                    {% csrf_token %}
-                                    <input type="number" name="quantity" min="1" max="99" value="1">
-                                    <input type="submit" class="btn" value="Add to Basket">
-                                </form>
-                                {% if user.is_authenticated %}
-                                    {% if menuitem.id in user_favorites %}
-                                        <a class="remove-favs"href="{% url 'remove_from_favorites' menuitem.id %}">Remove from Favorites</a>
-                                    {% else %}
-                                        <a class="add-favs"href="{% url 'add_to_favorites' menuitem.id %}">Add to Favorites</a>
-                                    {% endif %}
-                                    {% if menuitem.avg_rating %}
-                                        <div class="rating-stars" data-toggle="tooltip" title="{{ menuitem.avg_rating }} out of 5 stars">
-                                            {% for i in menuitem.avg_rating|star_range %}
-                                                <i class="fas fa-star"></i>
-                                            {% endfor %}
-                                        </div>
-                                    {% else %}
-                                        <small>No Rating</small>
-                                    {% endif %}
-                                    {% if request.user.is_superuser %}
-                                        <div class="card-footer">
-                                            <a href="{% url 'edit_menuitem' menuitem.id %}" class="btn btn-primary mr-5">Edit</a>
-                                            <a href="{% url 'delete_menuitem' menuitem.id %}" class="btn btn-danger ml-5">Delete</a>
-                                        </div>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div> {% endcomment %}
         </div>
     </div>
 {% endblock %}
