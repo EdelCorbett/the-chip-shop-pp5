@@ -29,7 +29,6 @@
                                 <th scope="col">Subtotal</th>
                             </tr>
                         </thead>
-
                         {% for item in basket_items %}
                             <tr>
                                 <td class="w-25">
@@ -66,7 +65,7 @@
                                                         <button class="increment-qty btn btn-sm btn-black rounded-0"
                                                                 data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
                                                             <span>
-                                                                <i class="fas fa-plus fa-sm"></i>
+                                                            <i class="fas fa-plus fa-sm"></i>
                                                             </span>
                                                         </button>
                                                     </div>
@@ -86,7 +85,6 @@
                             {% endfor %}
                         </div>
                     </div>
-                    </div>
                     <tr>
                     <td colspan="5" class="pt-5 pb-5 text-right">
                         <h4><strong>Basket Total: €{{ total|floatformat:2 }}</strong></h4>
@@ -104,11 +102,11 @@
                                 <span class="text-uppercase">Next</span>
                                 <span class="icon">
                                     <i class="fas fa-chevron-right"></i>
+                                </span>
                             </a>
                         </td>
                     </tr>
                 </table>
-            </div>
             {% else %}
                 <p class="lead mb-5">Your basket is empty.</p>
                 <hr>
@@ -120,6 +118,7 @@
                 </a>
             {% endif %}
         </div>
+    </div>
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
@@ -137,16 +136,15 @@
     $('.remove-item').click(function(e) {
         var csrfToken = "{{ csrf_token }}";
         var itemId = $(this).attr('id').split('remove_')[1];
-       
         var url = `/basket/remove/${itemId}/`;
         var data = {
             'csrfmiddlewaretoken': csrfToken
         }
 
         $.post(url, data)
-         .done(function() {
-             location.reload();
-         });
+        .done(function() {
+            location.reload();
+        });
     })
 </script>
 {% endblock %}

@@ -39,7 +39,7 @@
             </div>
             <div class="row menupage-container card-deck">
                 {% for menuitem in menu %}
-                    <div class="col-md-6  mb-3 mt-3">
+                    <div class="mb-3 mt-3">
                         <div class="card menu-card h-100">
                             {% if menuitem.image %}
                                 <a href="{% url 'menuitem_detail' menuitem.id %}">
@@ -57,7 +57,7 @@
                                 <form method="post" action="{% url 'add_to_basket' menuitem.id %}" class="d-flex justify-content-end my-3">
                                     {% csrf_token %}
                                     <input type="number" name="quantity" min="1" max="99" value="1" class="mr-2">
-                                    <input type="submit" class="btn btn-sm" value="Add to Basket">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Add to Basket">
                                 </form>
                                 {% if user.is_authenticated %}
                                     <div class="mt-2">

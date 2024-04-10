@@ -2,13 +2,13 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     {% block meta %}
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="The Chip Shop Cork, Ireland. Fast Food, Takeaway Food, Fish and Chips, Burgers and Chip, Pizza, Pizza Delivery, The Chip Shop Cork Fish and Chips Takeaway Delivery, Fast Delivery">
+        <meta
         <meta name="keywords" content="The Chip Shop, The Chip Shop Cork, The Chip Shop Ireland,Fast Food,Takeaway Food, The Chip Shop Fish and Chips, The Chip Shop Cork Fish and Chips,Burgers and Chip ,Pizza, Pizza Delivery ,, The Chip Shop Cork Fish and Chips Takeaway Delivery, Fast Delivery">
         <meta name="author" content="Edel Corbett">
     {% endblock %}
@@ -47,7 +47,7 @@
     <header class="container-fluid ">
         <div class="d-flex align-items-center">
             <div class="logo-container mr-0">
-                <img src="{% static 'images/the-chip-shop-logo.png' %}" alt="Logo">
+                <img src="{% static 'images/the-chip-shop-logo.png' %}" alt="Logo" aria-label="Logo of The Chip Shop">
             </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light flex-grow-1">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,10 +59,10 @@
                             <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                            <a class="nav-link" href="{% url 'menu' %}" aria-label="Menu page link">Menu</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link "  href="{% url 'inquiry_form' %}">Contact Us</a>
+                            <a class="nav-link "  href="{% url 'inquiry_form' %}"aria-label="Contact page link">Contact Us</a>
                             </a>
                         </li>
                     </ul>
@@ -70,29 +70,29 @@
                 <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 icon-container">
                     <ul class="list-inline list-unstyled text-center text-lg-right my-0">
                         <li class="list-inline-item dropdown">
-                            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="My Account">
                                 <div class="text-center header-icon">
                                     <div><i class="fas fa-user fa-lg"></i></div>
                                     <p class="my-0 d-none d-sm-block">My Account</p>
                                 </div>
                             </a>
-                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                            <div class="dropdown-menu border-0" aria-labelledby="user-options" aria-label="User options">
                                 {% if request.user.is_authenticated %}
                                     {% if request.user.is_superuser %}
                                         <a href="{% url 'admin:index' %}" class="dropdown-item">Django Admin panel</a>
-                                        <a href="{% url 'add_menuitem' %}" class="dropdown-item">Menu Management</a>
-                                        <a href="{% url 'view_orders_no_arg' %}" class="dropdown-item">Orders</a>
+                                        <a href="{% url 'add_menuitem' %}" class="dropdown-item"aria-label="Menu Managment">Menu Management</a>
+                                        <a href="{% url 'view_orders_no_arg' %}" class="dropdown-item" aria-label="View Orders">Orders</a>
                                     {% endif %}
-                                    <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                    <a href="{% url 'profile' %}" class="dropdown-item"aria-label="My Profile">My Profile</a>
+                                    <a href="{% url 'account_logout' %}" class="dropdown-item"aria-label="Logout">Logout</a>
                                 {% else %}
-                                    <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                    <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                                    <a href="{% url 'account_signup' %}" class="dropdown-item"aria-label="Register">Register</a>
+                                    <a href="{% url 'account_login' %}" class="dropdown-item"aria-label="Login">Login</a>
                                 {% endif %}
                             </div>
                         </li>
                         <li class="list-inline-item">
-                            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_basket' %}">
+                            <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'view_basket' %}" aria-label="View shopping basket">
                                 <div class="text-center header-icon">
                                     <div><i class="fa-solid fa-basket-shopping"></i></i></div>
                                         <p class="my-0 d-none d-sm-block">
@@ -112,11 +112,11 @@
         </div>
         <div class="row search-bar">  
             <div class="col-12 col-lg-3 my-auto py-1 py-lg-0 ml-auto mt-n2 header-icon">
-                <form method="GET" action="">
+                <form method="GET" action="" aria-label="Search form">
                     <div class="input-group w-100">
                         <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
                         <div class="input-group-append">
-                            <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                            <button class="form-control btn btn-black border border-black rounded-0" type="submit" aria-label="Search Button">
                                 <span class="icon">
                                     <i class="fas fa-search"></i>
                                 </span>
@@ -127,6 +127,9 @@
             </div>
         </div>
     </header>
+
+{% block page_header %}
+{% endblock %}
 <main class="container-fluid">
     {% if messages %}
         <div class="message-container">
@@ -145,13 +148,12 @@
                 {% endfor %}
         </div>
     {% endif %}
+   
+{% block content %}
+{% endblock %} 
 </main>
 
-{% block page_header %}
-{% endblock %}
 
-{% block content %}
-{% endblock %}
 
 {% include 'includes/footer.html' %}
 
@@ -164,14 +166,14 @@
 <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script> 
 <script>
     $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-$(document).ready(function() {
-    var numItems = $('.menupage-container .col-md-4').length;
-    if (numItems == 1) {
-        $('.menupage-container .col-md-4').removeClass('col-md-4').addClass('col-md');
-    }
-});
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+    $(document).ready(function() {
+        var numItems = $('.menupage-container .col-md-4').length;
+        if (numItems == 1) {
+            $('.menupage-container .col-md-4').removeClass('col-md-4').addClass('col-md');
+        }
+    });
 </script>
 {% endblock %}
 
