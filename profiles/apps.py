@@ -12,4 +12,3 @@ class ProfilesConfig(AppConfig):
         post_save.connect(create_user_profile, sender=User)
         from profiles.signals import save_profile
         post_save.connect(save_profile, sender=User)
-        

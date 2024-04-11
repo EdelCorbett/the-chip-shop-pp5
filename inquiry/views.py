@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import InquiryForm
-# Create your views here.
+
+
 def inquiry_form(request):
     if request.method == 'POST':
         form = InquiryForm(request.POST)
@@ -10,6 +11,7 @@ def inquiry_form(request):
     else:
         form = InquiryForm()
     return render(request, 'inquiry/inquiry_form.html', {'form': form})
+
 
 def inquiry_success(request):
     return render(request, 'inquiry/inquiry_success.html')

@@ -47,26 +47,25 @@
         {% endif %}
         {% if not user_has_purchased %}
         <div>
-        <a href="{% url 'menu' %}" class="btn btn-outline-dark mt-3">Back to Menu</a>
+            <a href="{% url 'menu' %}" class="btn btn-outline-dark mt-3">Back to Menu</a>
         </div>   
-    {% endif %}
+        {% endif %}
     </div>
-    <div class="row mt-3">
-        <div class="col-10">
+    <div class="row my-3">
+        <div class="col-12 ">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Reviews</h5>
-                    <hr>
                     {% if menuitem.reviews_set.all %}
                     <div class="review-container scrollable">
                         {% for review in menuitem.reviews_set.all|slice:":8" %}
                         <div class="review mb-3">
-                            <p class="mb-0">Reviewed by: {{ review.user.username }} on {{ review.created_on|date:"F j, Y" }}</p>
+                            <p class="mb-2">Reviewed by: {{ review.user.username }} on {{ review.created_on|date:"F j, Y" }}</p>
                             {% if review.user == request.user %}
-                                <a href="{% url 'edit_review' review.id %}">Edit</a>
-                                <a href="{% url 'delete_review' review.id %}">Delete</a>
+                                <a class="btn-secondary m-2 p-2"href="{% url 'edit_review' review.id %}">Edit</a>
+                                <a class="btn-danger m-2 p-2"href="{% url 'delete_review' review.id %}">Delete</a>
                             {% endif %}
-                            <p class="mb-0">Rating:</p>
+                            <p class="mb-0 pt-2">Rating:</p>
                             <div class="rating-stars">
                                 {% for i in review.rating|star_range %}
                                     <i class="fas fa-star"></i>

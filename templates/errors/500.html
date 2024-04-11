@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% comment %} Extra Title {% endcomment %}
 {% block extra_title %}500 Error{% endblock %}
 
 {% block content %}
@@ -10,4 +9,4 @@
     <p>There was a problem with our server. Please try again later.</p>
     <a class="btn-primary"href="{% url 'index' %}">Go back to Home</a>
 </div>
-{% endblock %
+{% endblock %}

@@ -2,14 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q , Avg
+from django.db.models import Q, Avg
 from django.db.models.functions import Lower
 from .models import Category, Menuitem, Favorite
 from .forms import MenuitemForm
 from checkout.models import Order, OrderLineItem
 from review.models import Reviews
 
-# Create your views here.
 
 def all_menu(request):
     """ A view to return menu page"""
@@ -36,32 +35,35 @@ def all_menu(request):
                     sortkey = f'-{sortkey}'
             menu = menu.order_by(sortkey)
 
-
         if 'category' in request.GET:
             category = request.GET['category'].split(',')
             menu = menu.filter(category__name__in=category)
             category = Category.objects.filter(name__in=category)
 
-
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(
+                    request, "You didn't enter any search criteria!")
                 return redirect(reverse('menu'))
-            
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
+
+            queries = Q(name__icontains=query) | Q(
+                description__icontains=query)
             menu = menu.filter(queries)
 
-    # Calculate average ratings for each menu item
     for item in menu:
-        avg_rating = Reviews.objects.filter(menuitem=item).aggregate(Avg('rating'))['rating__avg']
-        item.avg_rating = round(avg_rating, 2) if avg_rating is not None else None
+        avg_rating = Reviews.objects.filter(
+            menuitem=item).aggregate(Avg('rating'))['rating__avg']
+        item.avg_rating = round(
+                avg_rating, 2) if avg_rating is not None else None
 
     current_sorting = f'{sort}_{direction}'
     user_favorites = []
     if request.user.is_authenticated:
-        user_favorites = Favorite.objects.filter(user=request.user, menuitem__in=menu).values_list('menuitem_id', flat=True)
-        
+        user_favorites = Favorite.objects.filter(
+            user=request.user,
+            menuitem__in=menu).values_list(
+                'menuitem_id', flat=True)
 
     context = {
         'menu': menu,
@@ -75,26 +77,28 @@ def all_menu(request):
 
     return render(request, 'menu/menu.html', context)
 
+
 def menu_by_category(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
     menuitems = Menuitem.objects.filter(category=category)
-    return render(request, 'menu/menu.html', {'menu': menuitems, 'categories': Category.objects.all()})
+    return render(request,
+                  'menu/menu.html',
+                  {'menu': menuitems, 'categories': Category.objects.all()})
 
 
 def menuitem_detail(request, menuitem_id):
     """ A view to return individual menu items information"""
     menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
     if request.user.is_authenticated:
-        user_has_purchased = OrderLineItem.objects.filter(order__user_profile=request.user.userprofile, menuitem=menuitem).exists()
-        print(f"Logged in user: {request.user}")
+        user_has_purchased = OrderLineItem.objects.filter(
+            order__user_profile=request.user.userprofile,
+            menuitem=menuitem).exists()
         for review in menuitem.reviews_set.all():
-            print(f"Review user: {review.user}")
-    else:
-        user_has_purchased = False
-    
+            user_has_purchased = False
+
     context = {
-        'menuitem': menuitem, 
-        'user_has_purchased': user_has_purchased,  
+        'menuitem': menuitem,
+        'user_has_purchased': user_has_purchased,
     }
 
     return render(request, 'menu/menuitem_detail.html', context)
@@ -114,7 +118,9 @@ def add_menuitem(request):
             messages.success(request, 'Successfully added menu item!')
             return redirect(reverse('menuitem_detail', args=[menuitem.id]))
         else:
-            messages.error(request, 'Failed to add menu item. Please ensure the form is valid.')
+            messages.error(request,
+                           'Failed to add menu item.'
+                           'Please ensure the form is valid.')
     else:
         form = MenuitemForm()
 
@@ -141,7 +147,9 @@ def edit_menuitem(request, menuitem_id):
             messages.success(request, 'Successfully updated menu item!')
             return redirect(reverse('menuitem_detail', args=[menuitem.id]))
         else:
-            messages.error(request, 'Failed to update menu item. Please ensure the form is valid.')
+            messages.error(request,
+                           'Failed to update menu item.'
+                           'Please ensure the form is valid.')
     else:
         form = MenuitemForm(instance=menuitem)
         messages.info(request, f'You are editing {menuitem.name}')
@@ -172,13 +180,14 @@ def delete_menuitem(request, menuitem_id):
 def favorites_view(request):
     favorites = Favorite.objects.filter(user=request.user)
     favorite_ids = favorites.values_list('menuitem', flat=True)
-    return render(request,'home/index.html', {'favorites': favorites})
+    return render(request, 'home/index.html', {'favorites': favorites})
 
 
 @login_required
 def add_to_favorites(request, menuitem_id):
     menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
-    favorite, created = Favorite.objects.get_or_create(user=request.user, menuitem=menuitem)
+    favorite, created = Favorite.objects.get_or_create(
+        user=request.user, menuitem=menuitem)
     if not created:
         pass
     return redirect('menu')

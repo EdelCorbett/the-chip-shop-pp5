@@ -1,3 +1,4 @@
+
 # the-chip-shop-pp5
 A online ordering site for a fast-food takeaway
 
@@ -20,13 +21,94 @@ Github projects was use to follow agile principles. Using this help me organise 
 
 ### [Project Board](https://github.com/users/EdelCorbett/projects/15)
 
-The Project board was divided in to 4 columns todo,In progress, done and bugs 
+The Project board was divided in to 4 columns todo, In progress, done and bugs 
 ----
 ![](documentation/images/projectboard.png)
-
 ----
 ## MoSCoW Prioritization
 In this project MoSCoW was use to prioritize the most important features
+
+## Epics
+This project was do in  Epics, each Epic has a list of user stories.
+
+## User Stories
+There are 27 user-stories 24 are implemented 3 are for future features. Each user-storie is broken down in to Acceptance Criteria and Tasks.
+---
+![](documentation/images/user-storie-image.png)
+---
+### Epic 1 Basic System setup<details><summary>image</summary><img src="./documentation/images/epic1.png"></details>
+
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- | 
+|[#1](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/1)   | As a Developer I can setup a project so that begin project  | Yes     | 
+| [#2](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/2)   |  As a Developer I can create a database so that store project  |  Yes  |
+| [#3](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/3)   | As a Developer I can Deploy project early so that I can continually test the application during development   |  Yes  |
+---
+### Epic 2 User Registration and login<details><summary>image</summary><img src="./documentation/images/epic2.png"></details>
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- | 
+|[#5](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/5)   | As a user I can create an account so that i can access my account | Yes     | 
+|[#6](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/6)   | As a user I can login so that I can make an order | Yes     | 
+|[#23](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/23)   | As a customer I can create a profile so that i can review order history and personal information | Yes     |
+----
+### Epic 3  Menu <details><summary>image</summary><img src="./documentation/images/epic3.png"></details>
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- | 
+|[#7](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/7)   | As a customer, I want to browse the menu items available for order| Yes     | 
+|[#25](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/25)   | As a customer I can choose an item from the menu and view the items item page so that i can view all relevant information on the item| Yes     | 
+|[#8](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/8)   |As a customer I can add menu items to my basket so that i can make an online order | Yes     |
+|[#9](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/9)   |As a customer I can update or remove item form basket so that update my order | Yes     |
+----
+### Epic 4  Menu 
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#10](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/10)   | As a customer, I want to be able to place an order for delivery or collection | No    |  
+|[#11](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/11)   | As a customer I can specify a time so that i received my order at my preferred time| No    |
+----
+### Epic 4  Collection or delivery
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#10](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/10)   | As a customer, I want to be able to place an order for delivery or collection | No    |  
+|[#11](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/11)   | As a customer I can specify a time so that i received my order at my preferred time| No    |
+----
+### Epic 5 Payment
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#12](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/12)   | As a customer I can pay for my order securely using stripe | yes   |  
+|[#13](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/13)   | As a customer I can select payment type so that I can choose to pay in cash| No    |
+----
+
+### Epic 6 Email
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#14](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/14)   | As a Customer I can receive an email so that i know my order is comfirmed and payment is accepted| yes   | 
+|[#27](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/27)   | As a user I can subscribe so that I can receive newsletter to be informed of new offers| yes   |
+-----
+### Epic  7 Admin
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#4](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/4)   | As a Developer I can an Admin Site so that the site can be updated by the Admin|Yes   |
+|[#17](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/17)   | As a Admin I can view customer inquiries so that i can contact and follow up on their inquiry|Yes   |
+|[#15](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/15)   |As an admin, I want to be able to manage menu items (add, edit, delete) |Yes   |
+|[#16](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/16)   | As an admin, I want to be able to view and manage customer orders.| no   |  
+
+### Epic 8 inquiries and reviews
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#18](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/18)   | As a customer I can submit an inquiry form so that I can find out about booking party food| yes   | 
+|[#19](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/19)   | As a customer I can submit a review so that i can share my opinion with others| yes   |
+|[#20](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/20)   | As a customer I can edit my review so that should i change my opinion| yes   |
+|[#21](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/21)   | As a customer I can delete my review so that my review is not display| yes   |
+----
+### Epic 9 Newsletter and favorites list
+| #Number   |     User stories     |  Done  |
+|--------| ------------- | ------------- |
+|[#24](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/24)   | As a customer I can add my favorite menu item to list so that I can access them easy of ordering| yes   | 
+|[#22](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/22)   | As a Admin I can create a newsletter subscripition so that I can keep customers informed of menu changes and deals| yes   |
+
+
+
+
 ## Wireframes
 | PAGE                  |   Wireframes    |
 |-----------------------------|------------|
@@ -37,6 +119,7 @@ In this project MoSCoW was use to prioritize the most important features
 |  Home Mobile          | <details><summary>image</summary><img src="./documentation/wireframes/mobile-home.png"></details> |
 
 -------
+## Entity Relationship Diagram
 ![Entity-Relationship Diagram](documentation/images/erd-image.png)
 
 The Data model user in this project were for
@@ -124,8 +207,6 @@ The Data model user in this project were for
 |  comment  | TextField |
 ----
 
-
-
 ### Inquiry App
 | Name          | Field Type    |
 | ------------- | ------------- | 
@@ -135,19 +216,67 @@ The Data model user in this project were for
 |   message | TextField|
 |  created_at | DateTimeField |
 |  contacted | BooleanField |
-----
----
-# User Experience UX
-----
-Vistor to this site are here to view menu and make an order. The design is simple with an easy checkout process and a clear menu with images. 
------
 
+---
+---
+# CRUD
+## Create  
+- The user can create an account
+- The user can create a Order 
+- The user can create a Review and rating
+- Admin can create menuitems
+- Admin can create Orders 
+ 
+## Read 
+- The user can read their Order
+- The user can read the Review and rating
+- The user can read thier profile
+- Admin can read Reviews
+- Admin can view menu
+
+## Update 
+- The user update thier Profile
+- The user can update their Review and Rating 
+- Admin can update menu
+
+## Delete
+- The user can delete their Review and rating
+- Admin can delete Menuitem 
+- Admin can delete Review and rating
+- Admin can delete Users
+
+
+
+## User Experience UX
+
+- Vistor to this site are here to view menu and make an order. The design is simple with an easy checkout process and a clear menu with images. 
+----
+# Features  
+<details><summary>Click to display screenshot of Pages</summary><img ></details>
+
+----
+
+### Colours 
+The colours use to build the site were :
+Main Colors for Header,Background and Foot
+- #a6a6a6
+- #2f3335
+![](documentation/images/colorplatte.png)
+
+For Buttons bootstraps colors
+- Primary blue 
+- Danger red
+- Secondary grey
+---
+![](documentation/images/boothstrap-buttons.png)
+---
 ## Deployment
 ### Heroku
 This Project was deployed through [HEROKU](https://www.heroku.com/) using these steps:
 
 1. Create a Heroku account 
-2. Then select New
+2. Then select New 
+
 3. [Select Create new app](documentation/heroku/heroku-new.png)
 4. Name the App, select region
 5. [Select Create app](documentation/heroku/name_region.png)
@@ -287,7 +416,9 @@ Forking a repository allow you to make a copy of the repository so you can make 
  - [VS Code](https://code.visualstudio.com/)
  - [Balsamiq](https://balsamiq.com/)
  - [Favicon](https://favicon.io/)
- - [GitHub](https://github.com/) 
+ - [GitHub](https://github.com/)
+ - [AWS](https://aws.amazon.com/)
+ - [Chatgpt](https://chat.openai.com)
  - [dbdiagram.io](https://dbdiagram.io/) was used to create Entity Relationship Diagram
 ---
 ## Credits 
@@ -296,6 +427,8 @@ Forking a repository allow you to make a copy of the repository so you can make 
 * [Codemycom](https://www.youtube.com/@Codemycom) tutorials for understanding of django
 * [Pixbay](https://pixabay.com/)  Images
 * [Unsplash](https://unsplash.com/) Images
+* [Pexels](https://www.pexels.com/)  Images
+
 
 * [Font awesome](https://fontawesome.com/): Icons
 * [Coolors](https://coolors.co/) generate color palette

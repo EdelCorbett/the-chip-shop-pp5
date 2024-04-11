@@ -13,6 +13,9 @@ class Reviews(models.Model):
         (5, '5 Stars'),
     )
 
+    class Meta:
+        verbose_name_plural = 'Reviews'
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     menuitem = models.ForeignKey(Menuitem, on_delete=models.CASCADE)
     rating = models.IntegerField(choices=RATING_CHOICES)
@@ -21,4 +24,3 @@ class Reviews(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s review on {self.menuitem.name}"
-    

@@ -18,3 +18,4 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'the_chip_shop.views.handler404'
+handler500 = 'the_chip_shop.views.handler500'

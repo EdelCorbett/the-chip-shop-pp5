@@ -20,9 +20,6 @@ class UserProfile(models.Model):
                                         null=True, blank=True)
     default_country = CountryField(blank_label='Country',
                                    null=True, blank=True)
-    default_delivery_option = models.CharField(max_length=10, null=True,
-                                               blank=True,
-                                               default='collection')
 
     def __str__(self):
         return self.user.username
