@@ -14,8 +14,5 @@ urlpatterns = [
     path('view_orders/', views.view_orders, name='view_orders_no_arg'),
     path('view_orders/<str:order_number>/',
         views.view_orders, name='view_orders'),
-    path('view_orders/', view_orders, name='view_orders'),
-    path('view_orders/<int:order_number>/',
-        view_orders, name='view_order'),
     path('wh/', webhook, name='webhook'),
 ]

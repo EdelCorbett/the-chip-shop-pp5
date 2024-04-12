@@ -89,6 +89,7 @@ def menu_by_category(request, category_id):
 def menuitem_detail(request, menuitem_id):
     """ A view to return individual menu items information"""
     menuitem = get_object_or_404(Menuitem, pk=menuitem_id)
+    user_has_purchased = False
     if request.user.is_authenticated:
         user_has_purchased = OrderLineItem.objects.filter(
             order__user_profile=request.user.userprofile,

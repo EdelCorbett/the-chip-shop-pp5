@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="col-12 col-lg-6 order-container">
-                <p class="text-muted">Order</p>
+                <p class="text-black" style="font-size: 2em;">Order</p>
                 <div class="order table-responsive">
                     <table class="table table-sm">
                         <thead>
@@ -26,10 +26,17 @@
                             {% for order in orders %}
                                 <tr>
                                     <td>
+                                    {% if order.order_number %}
                                         <a class="order_number_link" href="{% url 'view_orders' order.order_number %}"
                                         title="{{ order.order_number }}">
                                             {{ order.order_number|truncatechars:6 }}
                                         </a>
+                                        {% else %}
+                                        <a class="order_number_link" href="{% url 'view_orders_no_arg' %}"
+                                        title="No order number"> 
+                                        No order number
+                                        </a>
+                                    {% endif %}
                                     </td>
                                     <td>{{ order.date }}</td>
                                     <td>

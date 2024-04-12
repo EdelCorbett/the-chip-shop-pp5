@@ -104,6 +104,7 @@ def checkout(request):
             order.original_basket = json.dumps(basket)
             order.delivery_option = delivery_option
             order.delivery = Decimal(settings.STANDARD_DELIVERY_PRICE)
+            order.save()
 
             for item_id, quantity in basket.items():
                 try:
@@ -123,9 +124,10 @@ def checkout(request):
                         "Please call us for assistance!")
                     )
                     order.delete()
-
                     return redirect(reverse('view_basket'))
-                
+
+            order.save()
+
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(
                 reverse('checkout_success', args=[order.order_number]))
@@ -215,8 +217,6 @@ def checkout_success(request, order_number):
         profile = UserProfile.objects.get(user=request.user)
         order.user_profile = profile
         order.save()
-        order_url = request.build_absolute_uri(
-            reverse('view_orders', args=[order_number]))
 
         if save_info:
             profile_data = {
@@ -243,7 +243,6 @@ def checkout_success(request, order_number):
         'order_total': order_total,
         'delivery': delivery,
         'grand_total': grand_total,
-        'order_url': order_url,
         'email': order.email,
     }
 
