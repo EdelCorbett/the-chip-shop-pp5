@@ -384,6 +384,8 @@ The privacy policy was generated using it can be access by clicking link in foot
 [Privacy Policy Generator](https://www.privacypolicygenerator.info/)
 ![](documentation/images/privacy-policy.png)
 
+### 404 and 500 error pages
+
 ## Deployment
 ### Heroku
 This Project was deployed through [HEROKU](https://www.heroku.com/) using these steps:
