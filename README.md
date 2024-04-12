@@ -65,7 +65,7 @@ There are 27 user-stories 24 are implemented 3 are for future features. Each use
 ### Epic 4  Menu 
 | #Number   |     User stories     |  Done  |
 |--------| ------------- | ------------- |
-|[#10](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/10)   | As a customer, I want to be able to place an order for delivery or collection | No    |  
+
 |[#11](https://github.com/EdelCorbett/the-chip-shop-pp5/issues/11)   | As a customer I can specify a time so that i received my order at my preferred time| No    |
 ----
 ### Epic 4  Collection or delivery
@@ -260,10 +260,14 @@ The Data model user in this project were for
 <details><summary>Home Page</summary>
 <img src="./documentation/images/home-page.png">
 </details>
+
+- Home Page has order now button that leads to menu page
 <details><summary>
 Menu Page</summary>
 <img src="./documentation/images/menu-page.png">
 </details>
+
+ - Menu page displays menuitems with add to basket button ant if user is super user it display edit and delete button so admin can edit or delete menuitem. 
 <details><summary>
 Menu Page As Admin</summary>
 <img src="./documentation/images/admin-menu-page.png">
@@ -272,72 +276,119 @@ Menu Page As Admin</summary>
 Menu Detail Page</summary>
 <img src="./documentation/images/menudetail-page.png">
 </details>
+
+- Menu Detail page displays menu item with a quanity and add to basket button
+- It also display reviews for this item their a keepshopping button that return to menu,a leave review button if u have purchesed the item or back to menu button if you never purchased the item
 <details><summary>
 Basket Page</summary>
 <img src="./documentation/images/basket-page.png">
 </details>
+
+- Basket page display items in basket and update and remove button so user can update thier order basket
+
 <details><summary>
 Delivery option Page</summary>
 <img src="./documentation/images/delivery-option-page.png">
 </details>
+
+- has two buttons 1 for collection and 1 for delivery if you try to get a delivery and your basket is under €10 an error is displayed 
 <details><summary>
 Sign In Page</summary>
 <img src="./documentation/images/sign-in-page.png">
 </details>
+
+- Sign in page has sign up button sign in button home and forgot passward buttons
 <details><summary>
 Checkout Page</summary>
 <img src="./documentation/images/checkout-page.png">
 </details>
+
+-Checkout Page has form input for stripe and profile also has adjust basket button and complete order buttton
 <details><summary>
 Sign Out Page</summary>
 <img src="./documentation/images/signout-page.png">
 </details>
+
+- Sign out button and cancel button
 <details><summary>
 Menu Management Page</summary>
 <img src="./documentation/images/menu-management.png">
 </details>
+
+- Has form so admin can add item to menu
 <details><summary>
 Profiles Page</summary>
 <img src="./documentation/images/profiles-page.png">
 </details>
+- Has Profile info and order history
 <details><summary>View Order Page</summary>
 <img src="./documentation/images/view-orders-page.png">
 </details>
+
+_has list of orders so admin can view
 <details><summary>Contact Us Page</summary>
-<img src="./documentation/images/view-orders-page.png">
+<img src="./documentation/images/contactus-page.png">
 </details>
+
+- Has form so user can submit inquiry and submit button
 <details><summary>Contact Us Success Page</summary>
 <img src="./documentation/images/inquiry-success.png">
 </details>
+
+- Displays Thank you message and back home buttton
 <details><summary>Menudetail if Superuser Page</summary>
 <img src="./documentation/images/menu-detail-super.png">
 </details>
-<details><summary>Review Page</summary>
+<details><summary>Review and Rating Page</summary>
 <img src="./documentation/images/review-page.png">
 </details>
+
+- Displays edit and delete button if user is admin
 <details><summary>Edit Review Page</summary>
 <img src="./documentation/images/edit-review.png">
 </details>
+
+- Displays form and save changes button
 <details><summary>Delete Review button</summary>
 <img src="./documentation/images/delete-review.png">
 </details>
+
+- User can delete their review
 <details><summary>Navbar Page</summary>
 <img src="./documentation/images/navbar.png">
 </details>
+
+- Navbar has home links to  home page, Menu links to menu page and Contact us links to inquire form 
 <details><summary>Category Navbar </summary>
 <img src="./documentation/images/category-nav.png">
 </details>
+<details><summary>My Account </summary>
+<img src="./documentation/images/my-account-admin.png">
+</details>
+
+-If User is Adim it displays a link to admin panel a Menu management link and order Link. if user is not admim it displays my profile and login/logout
+
 <details><summary>Toast</summary>
 <img src="./documentation/images/toasts.png">
 </details>
+
+- Toast are use trought out site to alert user 
 <details><summary>Favorites</summary>
 <img src="./documentation/images/favorites-carousal.png">
 </details>
+
+Favorites are displayed at to of home page on medium and large screen with a qty and add to basket button so loggin user can order thier favorite item easily
 <details><summary>Footer</summary>
 <img src="./documentation/images/footer.png">
 </details>
 
+- The footer contains all social links a mailchimp subscription form  and address of business 
+
 ----
+### Future Features
+
+- Admin Dasboard so Admin have an easy to use dashbord
+- Cash payment so customer can opt to pay with cash
 
 ### Colours 
 The colours use to build the site were :
