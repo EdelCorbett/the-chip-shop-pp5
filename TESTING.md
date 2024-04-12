@@ -109,8 +109,6 @@ Leave review     | Click      | Displays review form page                       
 |<details><summary>forms.py</summary><img src="./documentation/validator-images/review-form.png"></details>             | No errors   |
 
 
-
-
 |  Menu App                  |    Result    | 
 |-----------------------------|------------|
 |<details><summary>views.py</summary><img src="./documentation/validator-images/profile-views.png"></details>             | No errors   |
@@ -192,4 +190,22 @@ All Css file pass validatiors with no errors or warnings
 |<details><summary>Stripe Elements Js</summary><img src="./documentation/validator-images/stripe-elements.js.png"></details>             | No Errors  |
 |<details><summary>Quantity inpuy Js</summary><img src="./documentation/validator-images/quanitity_input.png"></details>             | No Errors  |
 
-
+### Lighthouse Testing
+|  Page                  |    Result    | 
+|-----------------------------|------------|
+|<details><summary>Home desktop</summary><img src="./documentation/validator-images/lh-home-desk.png"></details>             | pass   |
+|<details><summary>Home Mobile</summary><img src="./documentation/validator-images/lh-home-mobile.png"></details>             | pass   |
+|<details><summary>Menu desktop</summary><img src="./documentation/validator-images/lh-menu-desk.png"></details>             | pass   |
+|<details><summary>Menu Mobile</summary><img src="./documentation/validator-images/lh-menu-mobile.png"></details>             | pass   |
+|<details><summary>Contact Us desktop</summary><img src="./documentation/validator-images/lh-contact.png"></details>             | pass   |
+|<details><summary>Contact Us Mobile</summary><img src="./documentation/validator-images/lh-menu-mobile.png"></details>             | pass   |
+|<details><summary>Register desktop</summary><img src="./documentation/validator-images/lh-register-desktop.png"></details>             | pass   |
+|<details><summary>Register Mobile</summary><img src="./documentation/validator-images/lh-register-mobile.png"></details>             | pass   |
+|<details><summary>Login desktop</summary><img src="./documentation/validator-images/lh-login-desk.png"></details>             | pass   |
+|<details><summary>Login Mobile</summary><img src="./documentation/validator-images/lh-login-mobile.png"></details>             | pass   |
+|<details><summary>Basket desktop</summary><img src="./documentation/validator-images/lh-basket-desk.png"></details>             | pass   |
+|<details><summary>Basket Mobile</summary><img src="./documentation/validator-images/lh-basket-mobile.png"></details>             | pass   |
+|<details><summary>Menudetail desktop</summary><img src="./documentation/validator-images/lh-menu-detail-desk.png"></details>             | pass   |
+|<details><summary>Menudetail Mobile</summary><img src="./documentation/validator-images/lh-menu-detail-mobile.png"></details>             | pass   |
+|<details><summary>Delivery option desktop</summary><img src="./documentation/validator-images/lh-delivery-desk.png"></details>             | pass   |
+|<details><summary>Delivery Mobile</summary><img src="./documentation/validator-images/lh-delivery-mobile.png"></details>             | pass   |

@@ -385,6 +385,7 @@ The privacy policy was generated using it can be access by clicking link in foot
 ![](documentation/images/privacy-policy.png)
 
 ### 404 and 500 error pages
+![](documentation/images/404-page.png)
 
 ## Deployment
 ### Heroku
@@ -628,11 +629,8 @@ Aws use used for static files and images
   - Select Provide user access to the AWS Management Console then click next
   - Click Add user to group select the user group you created and click create user 
   - Copy the Access key ID and the Secret access key 
-  - Download.csv to save copy of
-
-
-
-
+  - Download.csv to save copy of your credentials
+  ---
 
 
 ## Testing 
@@ -651,7 +649,6 @@ All Testing in [TESTING.md](./TESTING.md)
 * [Pixbay](https://pixabay.com/)  Images
 * [Unsplash](https://unsplash.com/) Images
 * [Pexels](https://www.pexels.com/)  Images
-
 * [Font awesome](https://fontawesome.com/): Icons
 * [Coolors](https://coolors.co/) generate color palette
 
